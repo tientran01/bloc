@@ -1,3 +1,3 @@
 class Application {
-  static String baseUrl = 'https://reqres.in/api';
+  static String baseUrl = 'https://api.doctruyenaudio.net';
 }

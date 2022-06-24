@@ -1,7 +1,7 @@
 import 'package:bloc_demo/bloc/login/bloc/login_event.dart';
 import 'package:bloc_demo/bloc/login/bloc/login_bloc.dart';
 import 'package:bloc_demo/bloc/login/bloc/login_state.dart';
-import 'package:bloc_demo/component/custom_textField.dart';
+import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20.0),
                     MaterialButton(
                       onPressed: () {
-                        bloc.add(ShowUserNameAndPasswordEvent());
+                        bloc.add(SubmitLoginEvent());
                       },
                       child: Container(
                           height: 56,
