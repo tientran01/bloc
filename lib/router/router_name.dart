@@ -1,3 +1,4 @@
+import 'package:bloc_demo/pages/demo_cubit_screen.dart';
 import 'package:bloc_demo/pages/home.dart';
 import 'package:bloc_demo/pages/login.dart';
 import 'package:bloc_demo/pages/profile.dart';
@@ -7,6 +8,7 @@ class RouteName {
   static Map<String, WidgetBuilder> route = {
     "/": (BuildContext context) => const LoginScreen(),
     "/home": (BuildContext context) => const HomeScreen(),
-    "/profile": (BuildContext context) => const ProfileScreen()
+    "/profile": (BuildContext context) => const ProfileScreen(),
+    "/demo_cubit": (BuildContext context) => const DemoCubitScreen()
   };
 }

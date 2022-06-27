@@ -1,4 +1,5 @@
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
+import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:bloc_demo/router/router_name.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => LoginBloc()),
-        BlocProvider(create: (_)=> HomeBloc())
+        BlocProvider(create: (_)=> HomeBloc()),
+        BlocProvider(create: (_) => DemoCubit())
       ],
       child: const MyApp(),
     ),
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/demo_cubit",
       routes: RouteName.route
     );
   }
