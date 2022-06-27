@@ -4,7 +4,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final String title;
   final String hintText;
-  final Widget suffixIcon;
+  final Widget? suffixIcon;
   final bool? obscureText;
   final Function(String) onChanged;
 
@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
       this.textEditingController,
       required this.title,
       required this.hintText,
-      required this.suffixIcon,
+      this.suffixIcon,
       this.obscureText = false, required this.onChanged})
       : super(key: key);
 

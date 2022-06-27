@@ -25,9 +25,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       SubmitLoginEvent event, Emitter<void> emitter) async {
     try {
       ApiClient.api.login(state.username, state.password);
-      NavigationService.navigatorKey.currentState?.pushNamed('/home');
+      NavigationService.navigatorKey.currentState?.pushNamed("/home");
     } catch (e) {
-      print(e.toString());
+      Text(e.toString());
     }
   }
 
