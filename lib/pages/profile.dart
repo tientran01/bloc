@@ -15,8 +15,12 @@ class ProfileScreen extends StatelessWidget {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: datas.length,
-          itemBuilder: (context, index) =>
-              _buildDataItem(datas.elementAt(index))),
+          itemBuilder: (context, index) => Dismissible(
+              key: ValueKey<Data>(datas.elementAt(index)),
+              background: Container(
+                color: Colors.blueAccent,
+              ),
+              child: _buildDataItem(datas.elementAt(index)))),
     );
   }
 

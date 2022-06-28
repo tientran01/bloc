@@ -36,7 +36,19 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => homeBloc.add(const GetDataByIdEvent()),
             ),
             const SizedBox(height: 20.0),
-            CustomButton(text: "Get Data By UserId", onPressed: ()=> homeBloc.add(const GetDataByUserIdEvent()),)
+            CustomButton(
+                text: "Get Data By UserId",
+                onPressed: () => homeBloc.add(const GetDataByUserIdEvent())),
+            const SizedBox(height: 20.0),
+            CustomButton(
+              text: "Demo Cubit",
+              onPressed: () => homeBloc.add(ClickButtonDemoCubitEvent()),
+            ),
+            const SizedBox(height: 20.0),
+            CustomButton(
+              text: "Demo GetX",
+              onPressed: () => homeBloc.add(ClickButtonDemoGetXEvent()),
+            )
           ],
         );
       }),

@@ -10,6 +10,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState.initState()) {
     on<GetDataByIdEvent>(_onGetDataById);
     on<GetDataByUserIdEvent>(_onGetDataByUserId);
+    on<ClickButtonDemoCubitEvent>(_onClickButtonDemoCubit);
+    on<ClickButtonDemoGetXEvent>(_onClickButtonDemoGetX);
   }
 
   Future<void> _onGetDataById(
@@ -26,6 +28,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emitter(state.copyWith(datas: datas.datas));
     NavigationService.navigatorKey.currentState
         ?.pushNamed('/profile', arguments: datas.datas);
+  }
+
+  Future<void> _onClickButtonDemoCubit(
+      ClickButtonDemoCubitEvent event, Emitter<void> emitter) async {
+    NavigationService.navigatorKey.currentState?.pushNamed('/demo_cubit');
+  }
+
+  Future<void> _onClickButtonDemoGetX(
+      ClickButtonDemoGetXEvent event, Emitter<void> emitter) async {
+    NavigationService.navigatorKey.currentState?.pushNamed('/demo_getx');
   }
 
   static HomeBloc of(BuildContext context) =>

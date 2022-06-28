@@ -16,23 +16,23 @@ class _DemoCubitScreenState extends State<DemoCubitScreen> {
       appBar: AppBar(
         title: const Text("Demo Cubit"),
       ),
-      body: BlocBuilder<DemoCubit, int>(
-        builder: (context, state) {
-          return Center(
-            child: Text('$state'),
-          );
-        }
-      ),
+      body: BlocBuilder<DemoCubit, int>(builder: (context, state) {
+        return Center(
+          child: Text('$state'),
+        );
+      }),
       floatingActionButton: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
+            heroTag: 'cubit_btn1',
             child: const Icon(Icons.add),
             onPressed: () => context.read<DemoCubit>().increment(),
           ),
           const SizedBox(height: 4),
           FloatingActionButton(
+            heroTag: 'cubit_btn2',
             child: const Icon(Icons.remove),
             onPressed: () => context.read<DemoCubit>().decrement(),
           ),

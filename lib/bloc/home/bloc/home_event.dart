@@ -20,3 +20,7 @@ class GetDataByUserIdEvent extends HomeEvent {
   @override
   List<Object?> get props => [data];
 }
+
+class ClickButtonDemoCubitEvent extends HomeEvent {}
+
+class ClickButtonDemoGetXEvent extends HomeEvent {}

@@ -6,7 +6,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final Widget? suffixIcon;
   final bool? obscureText;
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
 
   const CustomTextField(
       {Key? key,
@@ -14,17 +14,19 @@ class CustomTextField extends StatelessWidget {
       required this.title,
       required this.hintText,
       this.suffixIcon,
-      this.obscureText = false, required this.onChanged})
+      this.obscureText = false,
+      this.onChanged})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: obscureText!,
-      controller: textEditingController,
+      keyboardType: TextInputType.emailAddress,
+      controller: textEditingController, 
       decoration: InputDecoration(
-          labelText: title, hintText: hintText, suffixIcon: suffixIcon,
-      
+        labelText: title,
+        hintText: hintText,
+        suffixIcon: suffixIcon,
       ),
       onChanged: onChanged,
     );
