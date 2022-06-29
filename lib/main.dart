@@ -1,23 +1,34 @@
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
+import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
+import 'package:bloc_demo/bloc/register/bloc/register_bloc.dart';
+import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
 import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
-import 'package:bloc_demo/pages/help.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:bloc_demo/router/router_name.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_it/get_it.dart';
 import 'bloc/login/bloc/login_bloc.dart';
 
 GetIt getIt = GetIt.instance;
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   getIt.registerLazySingleton<LoginBloc>(() => LoginBloc());
-  getIt.registerLazySingleton<Help>(() => Help());
+  getIt.registerLazySingleton<SplashBloc>(() => SplashBloc());
+  getIt.registerLazySingleton<RegisterBloc>(() => RegisterBloc());
+  getIt.registerLazySingleton<InformationBloc>(() => InformationBloc());
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => HomeBloc()),
-      BlocProvider(create: (_) => LoginBloc()),
-      BlocProvider(create: (_) => DemoCubit())],
+      providers: [
+        BlocProvider(create: (_) => SplashBloc()),
+        BlocProvider(create: (_) => HomeBloc()),
+        BlocProvider(create: (_) => LoginBloc()),
+        BlocProvider(create: (_) => RegisterBloc()),
+        BlocProvider(create: (_) => InformationBloc()),
+        BlocProvider(create: (_) => DemoCubit()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -31,7 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: "/home",
+      initialRoute: "/",
       routes: RouteName.route,
     );
   }

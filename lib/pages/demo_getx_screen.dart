@@ -1,6 +1,4 @@
-import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/get/demo/demo_controller.dart';
-import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +34,7 @@ class DemoGetxScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                CustomButton(text: "Pass value in GetX", onPressed: () => NavigationService.navigatorKey.currentState?.pushNamed('/demo_cubit'),)
+                // CustomButton(text: "Pass value in GetX", onPressed: () => NavigationService.navigatorKey.currentState?.pushNamed('/demo_cubit'),)
               ],
             );
           }),
