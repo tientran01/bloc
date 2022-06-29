@@ -6,33 +6,23 @@ abstract class LoginEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetDataFromTextFieldEvent extends LoginEvent {
-  final String? value;
-
-  const GetDataFromTextFieldEvent({this.value});
-
-  @override
-  List<Object?> get props => [value];
-}
-
-class GetUsernameAndPasswordFormTextFieldEvent extends LoginEvent {
-  final String? username;
+class GetEmailAndPasswordFormTextFieldEvent extends LoginEvent {
+  final String? email;
   final String? password;
-  const GetUsernameAndPasswordFormTextFieldEvent({this.username,this.password,});
+  const GetEmailAndPasswordFormTextFieldEvent({
+    this.email,
+    this.password,
+  });
 
   @override
-  List<Object?> get props => [username,password,];
+  List<Object?> get props => [
+        email,
+        password,
+      ];
 }
 
-class GetPasswordFromTextFieldEvent extends LoginEvent {
-  final String? password;
-  const GetPasswordFromTextFieldEvent({this.password});
-  @override
-  List<Object?> get props => [password];
-}
+class SubmitLoginEvent extends LoginEvent {}
 
-class ShowUserNameAndPasswordEvent extends LoginEvent {}
+class SubmitLoginWithFirebaseEvent extends LoginEvent {}
 
-class ShowUsernameEvent extends LoginEvent {}
-
-class ShowPasswordEvent extends LoginEvent {}
+class ClickRegisterEvent extends LoginEvent {}

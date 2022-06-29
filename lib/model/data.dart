@@ -1,26 +1,23 @@
 class Data {
+  int? userId;
   int? id;
-  String? name;
-  String? firstName;
-  String? lastName;
-  String? avatar;
+  String? title;
+  String? body;
 
-  Data({this.id, this.name, this.firstName, this.lastName, this.avatar});
+  Data({this.userId, this.id, this.title, this.body});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-        id: json['id'],
-        name: json['name'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        avatar: json['avatar']);
+  Data.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    body = json['body'];
   }
+}
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'first_name': firstName,
-    'last_name': lastName,
-    'avatar': avatar
-  };
+class GetData {
+  List<Data>? datas;
+  GetData({this.datas});
+  GetData.fromJson(List<dynamic> json) {
+    datas = json.map((e) => Data.fromJson(e)).toList();
+  }
 }

@@ -1,34 +1,36 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:bloc_demo/application/application.dart';
+import 'package:bloc_demo/model/data.dart';
+import 'package:bloc_demo/model/user_response.dart';
 import 'package:dio/dio.dart';
 
 class ApiClient {
+  static final ApiClient api = ApiClient._internal();
+
+  ApiClient._internal();
+
   final Dio _dio = Dio();
   String baseUrl = Application.baseUrl;
-
-  Future<Response> login(String email, String password) async {
-    try {
-      Response response = await _dio.post(baseUrl + "/users", data: {
-        'email': email,
-        'password': password,
-      });
-      return response.data;
-    } on DioError catch (e) {
-      return e.response?.data;
-    }
+  String getDataUrl = Application.getDataUrl;
+  Future<UserResponse> login(String? username, String? password) async {
+    Response response =
+        await _dio.post(baseUrl + "/api/v1/sign_in", queryParameters: {
+      'user_name': username,
+      'password': password,
+    });
+    return UserResponse.fromJson(response.data);
   }
 
-  Future<Response> getUser(int id) async {
-    try {
-      Response response = await _dio.get(baseUrl + "/users/$id");
-      return response.data;
-    } on DioError catch (e) {
-      return e.response?.data;
-    }
+  Future<GetData> getDataById(int id) async {
+    Response response = await _dio.get(getDataUrl + "/posts?id=$id");
+    GetData datas = GetData.fromJson(response.data);
+    return datas;
   }
 
-  // Future<Response> logout() async{
-
-  // }
+  Future<GetData> getDataByUserId(int userId) async {
+    Response response = await _dio.get(getDataUrl + "/posts?userId=$userId");
+    GetData datas = GetData.fromJson(response.data);
+    return datas;
+  }
 }

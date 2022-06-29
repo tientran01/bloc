@@ -1,30 +1,23 @@
 import 'package:equatable/equatable.dart';
 
 class LoginState extends Equatable {
-  final String? isLoading;
-  final String? nameAndPassword;
   final String? password;
-  final String? username;
+  final String? email;
 
-  const LoginState({
-    this.isLoading,
-    this.nameAndPassword,
-    this.password,
-    this.username
-  });
+  const LoginState(
+      {this.password, this.email});
 
   const LoginState.initState() : this();
 
   LoginState copyWith(
-      {String? isLoading, String? nameAndPassword, String? password, String? username}) {
+      {String? isLoading,
+      String? password,
+      String? email}) {
     return LoginState(
-        isLoading: isLoading,
-        nameAndPassword: nameAndPassword,
         password: password,
-        username: username
-      );
+        email: email);
   }
 
   @override
-  List<Object?> get props => [isLoading, nameAndPassword, password, username];
+  List<Object?> get props => [password, email];
 }
