@@ -44,6 +44,9 @@ dependencies:
   get_it: ^7.2.0
   firebase_auth: ^3.3.20
   firebase_core: ^1.18.0
+  country_code_picker: ^2.0.2
+  pinput: ^2.2.11
+  google_fonts: ^3.0.1
   
 dev_dependencies:
   flutter_test:
@@ -72,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

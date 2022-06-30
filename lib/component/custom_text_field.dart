@@ -7,26 +7,28 @@ enum TextFieldType {
 }
 
 class CustomTextField extends StatefulWidget {
-  final TextEditingController? textEditingController;
-  final String title;
+  final String? title;
   final String hintText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final bool obscureText;
   final Function(String)? onChanged;
   final Function()? onTapSuffixIcon;
   final TextFieldType type;
+  final TextInputType? keyboardType;
 
-  const CustomTextField(
-      {Key? key,
-      this.textEditingController,
-      required this.title,
-      required this.hintText,
-      this.suffixIcon,
-      this.obscureText = false,
-      this.onChanged,
-      this.type = TextFieldType.normal,
-      this.onTapSuffixIcon})
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    this.title,
+    required this.hintText,
+    this.suffixIcon,
+    this.obscureText = false,
+    this.onChanged,
+    this.type = TextFieldType.normal,
+    this.onTapSuffixIcon,
+    this.prefixIcon,
+    this.keyboardType,
+  }) : super(key: key);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -44,16 +46,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      controller: widget.textEditingController,
+      keyboardType: widget.keyboardType,
       obscureText: isHidden,
       decoration: InputDecoration(
         labelText: widget.title,
         hintText: widget.hintText,
-        suffixIcon: widget.suffixIcon ?? GestureDetector(
-          onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
-          child: suffixIconPassword()
-        ),
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: widget.suffixIcon ??
+            GestureDetector(
+                onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
+                child: suffixIconPassword()),
       ),
       onChanged: widget.onChanged,
     );

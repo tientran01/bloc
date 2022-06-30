@@ -25,4 +25,4 @@ class SubmitLoginEvent extends LoginEvent {}
 
 class SubmitLoginWithFirebaseEvent extends LoginEvent {}
 
-class ClickRegisterEvent extends LoginEvent {}
+class ClickSignUpEvent extends LoginEvent {}

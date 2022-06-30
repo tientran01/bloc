@@ -1,5 +1,5 @@
-import 'package:bloc_demo/bloc/register/bloc/register_event.dart';
-import 'package:bloc_demo/bloc/register/bloc/register_state.dart';
+import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_event.dart';
+import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_state.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../router/navigation_service.dart';
 
-class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(const RegisterState.initState()) {
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
+  SignUpBloc() : super(const SignUpState.initState()) {
     on<GetEmailAndPasswordFormTextFieldEvent>(
         _onGetEmailAndPasswordFormTextField);
     on<CreateNewAccountEvent>(_onCreateNewAccount);
     on<ShowEvent>(_onShow);
+    on<SignUpWithPhoneNumberEvent>(_onSignUpWithPhoneNumber);
   }
 
   Future<void> _onGetEmailAndPasswordFormTextField(
@@ -43,6 +44,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         password: state.password ?? event.password));
   }
 
-  static RegisterBloc of(BuildContext context) =>
-      BlocProvider.of<RegisterBloc>(context);
+  Future<void> _onSignUpWithPhoneNumber(
+      SignUpWithPhoneNumberEvent event, Emitter<void> emitter) async {
+    NavigationService.navigatorKey.currentState?.pushNamed("/phone_input");
+  }
+
+  static SignUpBloc of(BuildContext context) =>
+      BlocProvider.of<SignUpBloc>(context);
 }

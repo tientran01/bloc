@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class RegisterEvent extends Equatable {
+abstract class SignUpEvent extends Equatable {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
 
-class GetEmailAndPasswordFormTextFieldEvent extends RegisterEvent {
+class GetEmailAndPasswordFormTextFieldEvent extends SignUpEvent {
   final String? email;
   final String? password;
   GetEmailAndPasswordFormTextFieldEvent({this.email, this.password});
@@ -13,7 +13,7 @@ class GetEmailAndPasswordFormTextFieldEvent extends RegisterEvent {
   List<Object?> get props => [email, password];
 }
 
-class CreateNewAccountEvent extends RegisterEvent {
+class CreateNewAccountEvent extends SignUpEvent {
   final String? email;
   final String? password;
   CreateNewAccountEvent({this.email, this.password});
@@ -21,10 +21,18 @@ class CreateNewAccountEvent extends RegisterEvent {
   List<Object?> get props => [email, password];
 }
 
-class ShowEvent extends RegisterEvent {
+class ShowEvent extends SignUpEvent {
   final String? email;
   final String? password;
   ShowEvent({this.email, this.password});
   @override
   List<Object?> get props => [email, password];
 }
+
+class SignUpWithPhoneNumberEvent extends SignUpEvent {}
+
+class SignUpWithGoogleEvent extends SignUpEvent {}
+
+class SignUpWithTwitterEvent extends SignUpEvent {}
+
+class SignUpWithFacebookEvent extends SignUpEvent {}

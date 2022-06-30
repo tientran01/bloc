@@ -1,6 +1,7 @@
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
 import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
-import 'package:bloc_demo/bloc/register/bloc/register_bloc.dart';
+import 'package:bloc_demo/bloc/phone/bloc/phone_bloc.dart';
+import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
 import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
@@ -17,17 +18,19 @@ Future<void> main() async {
   await Firebase.initializeApp();
   getIt.registerLazySingleton<LoginBloc>(() => LoginBloc());
   getIt.registerLazySingleton<SplashBloc>(() => SplashBloc());
-  getIt.registerLazySingleton<RegisterBloc>(() => RegisterBloc());
+  getIt.registerLazySingleton<SignUpBloc>(() => SignUpBloc());
   getIt.registerLazySingleton<InformationBloc>(() => InformationBloc());
+  getIt.registerLazySingleton<PhoneBloc>(() => PhoneBloc());
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SplashBloc()),
         BlocProvider(create: (_) => HomeBloc()),
         BlocProvider(create: (_) => LoginBloc()),
-        BlocProvider(create: (_) => RegisterBloc()),
+        BlocProvider(create: (_) => SignUpBloc()),
         BlocProvider(create: (_) => InformationBloc()),
         BlocProvider(create: (_) => DemoCubit()),
+        BlocProvider(create: (_) => PhoneBloc()),
       ],
       child: const MyApp(),
     ),
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/phone_input",
       routes: RouteName.route,
     );
   }
