@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  AppResource.pandaIcon,
+                  AppResource.pandaImage,
                   scale: 2.5,
                 ),
                 const SizedBox(height: 30.0),

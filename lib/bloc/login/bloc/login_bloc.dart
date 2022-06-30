@@ -13,7 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         _onGetEmailAndPasswordFormTextField);
     on<SubmitLoginEvent>(_onSubmitLogin);
     on<SubmitLoginWithFirebaseEvent>(_onSubmitLoginWithFirebase);
-    on<ClickRegisterEvent>(_onClickRegister);
+    on<ClickSignUpEvent>(_onClickSignUp);
   }
 
   Future<void> _onGetEmailAndPasswordFormTextField(
@@ -45,9 +45,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Future<void> _onClickRegister(
-      ClickRegisterEvent event, Emitter<void> emitter) async {
-    NavigationService.navigatorKey.currentState?.pushNamed("/register");
+  Future<void> _onClickSignUp(
+      ClickSignUpEvent event, Emitter<void> emitter) async {
+    NavigationService.navigatorKey.currentState?.pushNamed("/sign_up");
   }
 
   static LoginBloc of(BuildContext context) =>

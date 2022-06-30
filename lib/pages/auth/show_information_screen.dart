@@ -2,7 +2,7 @@ import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
 import 'package:bloc_demo/bloc/information/bloc/information_event.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/main.dart';
-import 'package:bloc_demo/resource/app_string.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +23,8 @@ class ShowInformationScreen extends StatelessWidget {
           children: [
             
             CustomButton(
-              text: AppString.signOut,
-              onPressed: () =>
+              text: Constants.signOut,
+              onTap: () =>
                   getIt.get<InformationBloc>().add(ClickButtonSignOutEvent()),
             )
           ],

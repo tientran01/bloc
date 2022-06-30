@@ -33,21 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomButton(
               text: "Get Data By Id",
-              onPressed: () => homeBloc.add(const GetDataByIdEvent()),
+              onTap: () => homeBloc.add(const GetDataByIdEvent()),
             ),
             const SizedBox(height: 20.0),
             CustomButton(
                 text: "Get Data By UserId",
-                onPressed: () => homeBloc.add(const GetDataByUserIdEvent())),
+                onTap: () => homeBloc.add(const GetDataByUserIdEvent())),
             const SizedBox(height: 20.0),
             CustomButton(
               text: "Demo Cubit",
-              onPressed: () => homeBloc.add(ClickButtonDemoCubitEvent()),
+              onTap: () => homeBloc.add(ClickButtonDemoCubitEvent()),
             ),
             const SizedBox(height: 20.0),
             CustomButton(
               text: "Demo GetX",
-              onPressed: () => homeBloc.add(ClickButtonDemoGetXEvent()),
+              onTap: () => homeBloc.add(ClickButtonDemoGetXEvent()),
             )
           ],
         );
