@@ -1,16 +1,16 @@
-import 'package:bloc_demo/bloc/phone/bloc/phone_bloc.dart';
-import 'package:bloc_demo/bloc/phone/bloc/phone_event.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
+import 'package:bloc_demo/component/validator.dart';
 import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../bloc/phone_auth/bloc/phone_auth_bloc.dart';
+import '../../../bloc/phone_auth/bloc/phone_auth_event.dart';
+import '../../../bloc/phone_auth/bloc/phone_auth_state.dart';
 
-import '../../../bloc/phone/bloc/phone_state.dart';
-
-class PhoneInputScreen extends StatelessWidget {
+class PhoneInputScreen extends StatelessWidget with Validator {
   const PhoneInputScreen({Key? key}) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class PhoneInputScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(Constants.signUp),
       ),
-      body: BlocBuilder<PhoneBloc, PhoneState>(builder: (_, state) {
+      body: BlocBuilder<PhoneAuthBloc, PhoneAuthState>(builder: (_, state) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: Constants.size30),
           child: Column(
@@ -28,9 +28,12 @@ class PhoneInputScreen extends StatelessWidget {
               CustomTextField(
                 keyboardType: TextInputType.phone,
                 hintText: Constants.phoneInput,
+                onChanged: (String phoneNumber) => getIt
+                    .get<PhoneAuthBloc>()
+                    .add(GetPhoneFromFieldAndValidateEvent(phoneNumber: phoneNumber)),
                 suffixIcon: InkWell(
-                  onTap: () =>
-                      getIt.get<PhoneBloc>().add(const SendOtpToPhoneEvent()),
+                  onTap: () => getIt.get<PhoneAuthBloc>().add(
+                      SendOtpToPhoneAuthEvent(phoneNumber: state.phoneNumber)),
                   customBorder: const CircleBorder(),
                   splashColor: AppColor.h413F42,
                   child: Image.asset(

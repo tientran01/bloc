@@ -22,7 +22,7 @@ class Constants {
   static const String forgetPassword = "Forget password.";
   static const String or = 'OR';
   static const String send = "Send";
-  static const String requestInputOTP = "Enter your 4 digit OTP";
+  static const String requestInputOTP = "Enter your 6 digit OTP";
   static const String sendOTPfail = "Didn't recieve code? ";
   static const String requestAgain = "Request again";
   static const String verifyPhone = "Verify Phone";
