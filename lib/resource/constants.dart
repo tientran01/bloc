@@ -16,14 +16,18 @@ class Constants {
   static const String confirmPasswordInput = "Enter password again";
   static const String login = "Login";
   static const String signUp = "Sign Up";
+  static const String signUpWithPhone = "Sign Up With Phone Number";
   static const String signOut = "Sign Out";
   static const String noAccount = "Don't have account?";
   static const String haveAccount = "Already have an account?";
   static const String forgetPassword = "Forget password.";
   static const String or = 'OR';
   static const String send = "Send";
-  static const String requestInputOTP = "Enter your 4 digit OTP";
+  static const String requestInputOTP = "Enter your 6 digit OTP";
   static const String sendOTPfail = "Didn't recieve code? ";
   static const String requestAgain = "Request again";
   static const String verifyPhone = "Verify Phone";
+  static const String required = "Required";
+  static const String error = "Error";
+  static const String passwordError = "Enter a password with length at least 6";
 }

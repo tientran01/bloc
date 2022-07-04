@@ -18,16 +18,18 @@ class ShowInformationScreen extends StatelessWidget {
         title: const Text("Show information"),
       ),
       body: BlocBuilder<InformationBloc, InformationState>(builder: (_, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            
-            CustomButton(
-              text: Constants.signOut,
-              onTap: () =>
-                  getIt.get<InformationBloc>().add(ClickButtonSignOutEvent()),
-            )
-          ],
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: Constants.size30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                text: Constants.signOut,
+                onTap: () =>
+                    getIt.get<InformationBloc>().add(ClickButtonSignOutEvent()),
+              )
+            ],
+          ),
         );
       }),
     );

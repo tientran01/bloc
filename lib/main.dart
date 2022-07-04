@@ -1,8 +1,9 @@
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
 import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
-import 'package:bloc_demo/bloc/phone/bloc/phone_bloc.dart';
+import 'package:bloc_demo/bloc/phone_auth/bloc/phone_auth_bloc.dart';
 import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
+import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_bloc.dart';
 import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:bloc_demo/router/router_name.dart';
@@ -20,7 +21,8 @@ Future<void> main() async {
   getIt.registerLazySingleton<SplashBloc>(() => SplashBloc());
   getIt.registerLazySingleton<SignUpBloc>(() => SignUpBloc());
   getIt.registerLazySingleton<InformationBloc>(() => InformationBloc());
-  getIt.registerLazySingleton<PhoneBloc>(() => PhoneBloc());
+  getIt.registerLazySingleton<PhoneAuthBloc>(() => PhoneAuthBloc());
+  getIt.registerLazySingleton<VerifyOtpBloc>(() => VerifyOtpBloc());
   runApp(
     MultiBlocProvider(
       providers: [
@@ -30,7 +32,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => SignUpBloc()),
         BlocProvider(create: (_) => InformationBloc()),
         BlocProvider(create: (_) => DemoCubit()),
-        BlocProvider(create: (_) => PhoneBloc()),
+        BlocProvider(create: (_) => PhoneAuthBloc()),
+        BlocProvider(create: (_) => VerifyOtpBloc())
       ],
       child: const MyApp(),
     ),

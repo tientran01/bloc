@@ -12,7 +12,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<GetEmailAndPasswordFormTextFieldEvent>(
         _onGetEmailAndPasswordFormTextField);
     on<CreateNewAccountEvent>(_onCreateNewAccount);
-    on<ShowEvent>(_onShow);
     on<SignUpWithPhoneNumberEvent>(_onSignUpWithPhoneNumber);
   }
 
@@ -24,24 +23,21 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         password: event.password ?? state.password));
   }
 
-  Future<void> _onCreateNewAccount(
+  Future<User?> _onCreateNewAccount(
       CreateNewAccountEvent event, Emitter<void> emitter) async {
     try {
-      FirebaseHelper.shared
-          .signUp(
-              email: event.email ?? state.email,
-              password: event.password ?? state.password)
-          .then((value) =>
-              NavigationService.navigatorKey.currentState?.pushNamed('/home'));
+      User? user = await FirebaseHelper.shared.signUp(
+        email: event.email ?? state.email,
+        password: event.password ?? state.password,
+      );
+      if (user != null) {
+        NavigationService.navigatorKey.currentState
+            ?.pushNamed("/show_information");
+        return Future.value(user);
+      } return Future.error("User is null after creating an account");
     } on FirebaseAuthException catch (e) {
-      Text(e.toString());
+      return Future.error(e.message!);
     }
-  }
-
-  Future<void> _onShow(ShowEvent event, Emitter<void> emitter) async {
-    emitter(state.copyWith(
-        email: state.email ?? event.email,
-        password: state.password ?? event.password));
   }
 
   Future<void> _onSignUpWithPhoneNumber(

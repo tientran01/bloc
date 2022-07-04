@@ -28,28 +28,33 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("BLOC DEMO"),
       ),
       body: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomButton(
-              text: "Get Data By Id",
-              onTap: () => homeBloc.add(const GetDataByIdEvent()),
-            ),
-            const SizedBox(height: 20.0),
-            CustomButton(
-                text: "Get Data By UserId",
-                onTap: () => homeBloc.add(const GetDataByUserIdEvent())),
-            const SizedBox(height: 20.0),
-            CustomButton(
-              text: "Demo Cubit",
-              onTap: () => homeBloc.add(ClickButtonDemoCubitEvent()),
-            ),
-            const SizedBox(height: 20.0),
-            CustomButton(
-              text: "Demo GetX",
-              onTap: () => homeBloc.add(ClickButtonDemoGetXEvent()),
-            )
-          ],
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomButton(
+                text: "Get Data By Id",
+                onTap: () => homeBloc.add(const GetDataByIdEvent()),
+              ),
+              const SizedBox(height: 20.0),
+              CustomButton(
+                  text: "Get Data By UserId",
+                  onTap: () => homeBloc.add(const GetDataByUserIdEvent())),
+              const SizedBox(height: 20.0),
+              CustomButton(
+                text: "Demo Cubit",
+                onTap: () => homeBloc.add(ClickButtonDemoCubitEvent()),
+              ),
+              const SizedBox(height: 20.0),
+              CustomButton(
+                text: "Demo GetX",
+                onTap: () => homeBloc.add(ClickButtonDemoGetXEvent()),
+              )
+            ],
+          ),
         );
       }),
     );

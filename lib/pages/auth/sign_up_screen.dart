@@ -7,6 +7,7 @@ import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/resource/app_style.dart';
+import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,7 +64,8 @@ class SignUpScreen extends StatelessWidget {
                       style: AppStyle.title.copyWith(color: AppColor.h413F42),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => NavigationService.navigatorKey.currentState
+                          ?.pushNamed("/login"),
                       child: Text(
                         Constants.login,
                         style: AppStyle.title.copyWith(color: AppColor.hFF9F29),

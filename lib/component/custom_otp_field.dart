@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomOTPField extends StatelessWidget {
-  const CustomOTPField({Key? key}) : super(key: key);
+  final Function(String)? onChanged;
+  const CustomOTPField({Key? key, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Pinput(
       defaultPinTheme: AppStyle.appStyle.defaultPinTheme,
+      length: 6,
+      onChanged: onChanged,
     );
   }
-  
 }
