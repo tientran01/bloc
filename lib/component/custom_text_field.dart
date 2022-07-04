@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 enum TextFieldType {
@@ -17,7 +16,7 @@ class CustomTextField extends StatefulWidget {
   final Function()? onTapSuffixIcon;
   final TextFieldType type;
   final TextInputType? keyboardType;
-  final String? Function(String?)? validator;
+  final String? errorText;
 
   const CustomTextField({
     Key? key,
@@ -29,7 +28,7 @@ class CustomTextField extends StatefulWidget {
     this.type = TextFieldType.normal,
     this.onTapSuffixIcon,
     this.prefixIcon,
-    this.keyboardType, this.validator, 
+    this.keyboardType, this.errorText,
   }) : super(key: key);
 
   @override
@@ -51,6 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       obscureText: isHidden,
       decoration: InputDecoration(
+        errorText: widget.errorText,
         labelText: widget.title,
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
@@ -60,7 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 child: suffixIconPassword()),
       ),
       onChanged: widget.onChanged,
-      validator: widget.validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 

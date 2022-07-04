@@ -31,10 +31,8 @@ class LoginScreen extends StatelessWidget {
                       title: Constants.email,
                       hintText: Constants.emailInput,
                       suffixIcon: const Icon(Icons.email),
-                      onChanged: (String email) => getIt
-                          .get<LoginBloc>()
-                          .add(GetEmailAndPasswordFormTextFieldEvent(
-                              email: email))),
+                      onChanged: (String email) => getIt.get<LoginBloc>().add(
+                          GetEmailAndPasswordFormTextFieldEvent(email: email))),
                   CustomTextField(
                       title: Constants.password,
                       type: TextFieldType.password,
@@ -59,7 +57,8 @@ class LoginScreen extends StatelessWidget {
                         style: AppStyle.title,
                       ),
                       GestureDetector(
-                        onTap: () => getIt.get<LoginBloc>().add(ClickSignUpEvent()),
+                        onTap: () =>
+                            getIt.get<LoginBloc>().add(ClickSignUpEvent()),
                         child: Text(
                           Constants.signUp,
                           style: AppStyle.title

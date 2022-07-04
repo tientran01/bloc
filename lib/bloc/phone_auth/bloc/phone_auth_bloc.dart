@@ -10,8 +10,9 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   PhoneAuthBloc() : super(const PhoneAuthState.initState()) {
     on<GetPhoneFromFieldAndValidateEvent>(_onGetPhoneFromFieldAndValidate);
     on<SendOtpToPhoneAuthEvent>(_onSendOtpPhoneNumber);
+    on<VerificationFailedEvent>(_onVerificationFailed);
     on<VerifySentOtpEvent>(_onVerifySentOtp);
-    on<VerificationCompletedEvent>(_loginWithCredential);
+    on<LoginWithPhoneNumberEvent>(_onLoginWithPhoneNumber);
   }
   Future<void> _onGetPhoneFromFieldAndValidate(
     GetPhoneFromFieldAndValidateEvent event,
@@ -24,61 +25,32 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     SendOtpToPhoneAuthEvent event,
     Emitter<PhoneAuthState> emitter,
   ) async {
-    try {
-      FirebaseHelper.shared.verifyPhoneNumber(
-        phoneNumber: state.phoneNumber ?? "",
-        onVerificationCompleted: (AuthCredential authCredential) async {
-          add(VerificationCompletedEvent(credential: authCredential));
-        },
-        onVerificationFailed: (FirebaseAuthException error) {
-          add(VerificationFailedEvent(error: error.code));
-        },
-        onCodeSent: (verificationID, resentToken) {
-          add(PhoneOtpSendEvent(
-              verificationId: state.verificationId, token: state.token));
-        },
-        onCodeAutoRetrievalTimeout: (verificationID) {},
-      );
-    } catch (e) {
-      add(VerificationFailedEvent(error: e.toString()));
-    }
+    FirebaseHelper.shared.verifyPhoneNumber(
+      phoneNumber: state.phoneNumber ?? "",
+      onVerificationCompleted: (AuthCredential authCredential) async {},
+      onVerificationFailed: (FirebaseAuthException error) {
+        add(VerificationFailedEvent(error: error.code));
+      },
+      onCodeSent: (String? verificationID, int? resentToken) {
+        NavigationService.navigatorKey.currentState?.pushNamed("/phone_otp", arguments: state.phoneNumber ?? event.phoneNumber);
+      },
+      onCodeAutoRetrievalTimeout: (verificationID) {},
+    );
   }
 
   Future<void> _onVerifySentOtp(
-    VerifySentOtpEvent event,
-    Emitter<void> emitter,
-  ) async {
-    try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: event.verificationId ?? "",
-        smsCode: event.otpCode ?? "",
-      );
-      add(VerificationCompletedEvent(credential: credential));
-    } catch (e) {
-      VerificationFailedEvent(error: e.toString());
-    }
+      VerifySentOtpEvent event, Emitter<void> emitter) async {
+    emitter(state.copyWith(otpCode: event.otpCode ?? ""));
   }
 
-  Future<void> _loginWithCredential(
-    VerificationCompletedEvent event,
+  Future<void> _onVerificationFailed(
+    VerificationFailedEvent event,
     Emitter<void> emitter,
-  ) async {
-    try {
-      await FirebaseHelper.shared.auth
-          .signInWithCredential(event.credential)
-          .then(
-        (user) {
-          if (user.user != null) {
-            NavigationService.navigatorKey.currentState
-                ?.pushNamed("/phone_otp");
-          }
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      emitter(VerificationFailedEvent(error: e.code));
-    } catch (e) {
-      emitter(VerificationFailedEvent(error: e.toString()));
-    }
+  ) async {}
+
+  Future<void> _onLoginWithPhoneNumber(
+      LoginWithPhoneNumberEvent event, Emitter<void> emitter) async {
+    FirebaseHelper.shared.loginWithPhoneNumber(state.otpCode);
   }
 
   static PhoneAuthBloc of(BuildContext context) =>

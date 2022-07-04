@@ -47,6 +47,7 @@ dependencies:
   country_code_picker: ^2.0.2
   pinput: ^2.2.11
   google_fonts: ^3.0.1
+  formz: ^0.4.1
   
 dev_dependencies:
   flutter_test:

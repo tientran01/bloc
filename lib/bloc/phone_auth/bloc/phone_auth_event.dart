@@ -22,6 +22,7 @@ class SendOtpToPhoneAuthEvent extends PhoneAuthEvent {
   List<Object?> get props => [phoneNumber];
 }
 
+
 //khi nhap otp, bat dau xac thuc
 class VerifySentOtpEvent extends PhoneAuthEvent {
   final String? otpCode;
@@ -57,3 +58,5 @@ class PhoneOtpSendEvent extends PhoneAuthEvent {
   @override
   List<Object?> get props => [verificationId];
 }
+
+class LoginWithPhoneNumberEvent extends PhoneAuthEvent {}
