@@ -28,7 +28,9 @@ class Constants {
   static const String requestAgain = "Request again";
   static const String verifyPhone = "Verify Phone";
   static const String required = "Required";
-  static const String error = "Error";
   static const String passwordError = "Enter a password with length at least 6";
   static const String phoneGetOtp = "Code is sent to ";
+  static const String emailInvalid = "Invalid email";
+  static const String phoneInvalid = "Invalid phone";
+  static const String passwordInvalid = "Invalid password";
 }

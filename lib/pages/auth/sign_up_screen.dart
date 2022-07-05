@@ -35,19 +35,23 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 SizedBox(height: Constants.size30),
                 CustomTextField(
-                    type: TextFieldType.email,
-                    title: Constants.email,
-                    hintText: Constants.emailInput,
-                    suffixIcon: const Icon(Icons.email),
-                    onChanged: (String email) => getIt.get<SignUpBloc>().add(
-                        GetEmailAndPasswordFormTextFieldEvent(email: email))),
+                  type: TextFieldType.email,
+                  title: Constants.email,
+                  hintText: Constants.emailInput,
+                  suffixIcon: const Icon(Icons.email),
+                  onChanged: (String email) => getIt.get<SignUpBloc>().add(
+                        GetEmailAndPasswordFormTextFieldEvent(email: email),
+                      ),
+                ),
+                SizedBox(height: Constants.size10),
                 CustomTextField(
                   type: TextFieldType.password,
                   title: Constants.password,
                   hintText: Constants.usernameInput,
                   onChanged: (String password) => getIt.get<SignUpBloc>().add(
-                      GetEmailAndPasswordFormTextFieldEvent(
-                          password: password)),
+                        GetEmailAndPasswordFormTextFieldEvent(
+                            password: password),
+                      ),
                 ),
                 SizedBox(height: Constants.size30),
                 CustomButton(

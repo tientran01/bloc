@@ -20,9 +20,9 @@ class RouteName {
     AppRouteName.profile: (BuildContext context) => const ProfileScreen(),
     AppRouteName.demoCubit: (BuildContext context) => const DemoCubitScreen(),
     AppRouteName.demoGetX: (BuildContext context) => const DemoGetxScreen(),
-    AppRouteName.showInformation: (BuildContext context) => const ShowInformationScreen(),
+    AppRouteName.showInformation: (BuildContext context) =>
+        const ShowInformationScreen(),
     AppRouteName.phoneInput: (BuildContext context) => const PhoneInputScreen(),
     AppRouteName.phoneOtp: (BuildContext context) => const PhoneOTPScreen(),
-
   };
 }

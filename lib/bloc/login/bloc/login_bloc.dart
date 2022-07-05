@@ -21,8 +21,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       state.copyWith(
         email: event.email ?? state.email,
         password: event.password ?? state.password,
-        isEmailInvalid: isEmailValid(state.email ?? ""),
-        isPasswordInvalid: isPasswordValid(event.password ?? ""),
       ),
     );
   }
@@ -48,20 +46,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onClickSignUp(
       ClickSignUpEvent event, Emitter<void> emitter) async {
     NavigationService.navigatorKey.currentState?.pushNamed(AppRouteName.signUp);
-  }
-
-  bool isEmailValid(String email) {
-    final emailRegExp = RegExp(
-      r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-    );
-    return emailRegExp.hasMatch(email);
-  }
-
-  bool isPasswordValid(String password) {
-    final RegExp passwordRegExp = RegExp(
-      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
-    );
-    return passwordRegExp.hasMatch(password);
   }
 
   static LoginBloc of(BuildContext context) =>

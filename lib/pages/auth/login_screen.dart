@@ -31,10 +31,11 @@ class LoginScreen extends StatelessWidget {
                     title: Constants.email,
                     hintText: Constants.emailInput,
                     suffixIcon: const Icon(Icons.email),
-                    onChanged: (String email) => getIt.get<LoginBloc>().add(
+                    onChanged: (email) => getIt.get<LoginBloc>().add(
                           GetEmailAndPasswordFormTextFieldEvent(email: email),
                         ),
                   ),
+                  SizedBox(height: Constants.size10),
                   CustomTextField(
                       title: Constants.password,
                       type: TextFieldType.password,

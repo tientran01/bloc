@@ -6,14 +6,13 @@ class PhoneAuthState extends Equatable {
   final String? otpCode;
   final String? verificationId;
   final int? token;
-  final bool? isPhoneValid;
-  const PhoneAuthState(
-      {this.phoneNumber,
-      this.error,
-      this.otpCode,
-      this.verificationId,
-      this.token,
-      this.isPhoneValid});
+  const PhoneAuthState({
+    this.phoneNumber,
+    this.error,
+    this.otpCode,
+    this.verificationId,
+    this.token,
+  });
 
   const PhoneAuthState.initState() : this();
 
@@ -23,7 +22,6 @@ class PhoneAuthState extends Equatable {
     String? otpCode,
     String? verificationId,
     int? token,
-    bool? isPhoneValid,
   }) {
     return PhoneAuthState(
       phoneNumber: phoneNumber,
@@ -31,11 +29,10 @@ class PhoneAuthState extends Equatable {
       otpCode: otpCode,
       verificationId: verificationId,
       token: token,
-      isPhoneValid: isPhoneValid,
     );
   }
 
   @override
   List<Object?> get props =>
-      [phoneNumber, error, otpCode, verificationId, token, isPhoneValid];
+      [phoneNumber, error, otpCode, verificationId, token];
 }

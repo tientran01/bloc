@@ -1,9 +1,13 @@
+import 'package:bloc_demo/resource/app_color.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 enum TextFieldType {
   email,
   password,
   normal,
+  phoneNumber,
 }
 
 class CustomTextField extends StatefulWidget {
@@ -16,8 +20,7 @@ class CustomTextField extends StatefulWidget {
   final Function()? onTapSuffixIcon;
   final TextFieldType type;
   final TextInputType? keyboardType;
-  final String? errorText;
-  final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     Key? key,
@@ -30,7 +33,7 @@ class CustomTextField extends StatefulWidget {
     this.onTapSuffixIcon,
     this.prefixIcon,
     this.keyboardType,
-    this.errorText, this.validator,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -40,6 +43,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   TextFieldType? type;
   bool isHidden = false;
+  bool isValid = false;
   @override
   void initState() {
     super.initState();
@@ -52,25 +56,33 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       obscureText: isHidden,
       decoration: InputDecoration(
-        errorText: widget.errorText,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
         labelText: widget.title,
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon ??
             GestureDetector(
-                onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
-                child: suffixIconPassword()),
+              onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
+              child: suffixIconPassword(),
+            ),
+        border: outlineInputBorder(AppColor.hFF9F29),
+        enabledBorder: outlineInputBorder(AppColor.borderOTPColor),
+        focusedBorder: outlineInputBorder(Colors.blueGrey),
+        errorBorder: outlineInputBorder(Colors.red.shade800)
       ),
       onChanged: widget.onChanged,
+      inputFormatters: widget.inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: widget.validator,
+      validator: (value) => validatorText(value),
     );
   }
 
   void changeSuffixIcon() {
-    setState(() {
-      isHidden = !isHidden;
-    });
+    setState(
+      () {
+        isHidden = !isHidden;
+      },
+    );
   }
 
   Widget suffixIconPassword() {
@@ -82,5 +94,62 @@ class _CustomTextFieldState extends State<CustomTextField> {
       }
     }
     return Container();
+  }
+
+  String validatorText(String? value) {
+    switch (widget.type) {
+      case TextFieldType.email:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isEmailValid(value)) {
+          return Constants.emailInvalid;
+        }
+        break;
+      case TextFieldType.password:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isPasswordValid(value)) {
+          return Constants.passwordInvalid;
+        }
+        break;
+      case TextFieldType.normal:
+        break;
+      case TextFieldType.phoneNumber:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isPhoneValid(value)) {
+          return Constants.phoneInvalid;
+        }
+        break;
+    }
+    return "";
+  }
+
+  bool isEmailValid(String email) {
+    final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
+    return emailRegExp.hasMatch(email);
+  }
+
+  bool isPasswordValid(String password) {
+    final RegExp passwordRegExp = RegExp(
+      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
+    );
+    return passwordRegExp.hasMatch(password);
+  }
+
+  bool isPhoneValid(String phone) {
+    final RegExp phoneRegExp = RegExp(
+      r'(^(?:[+0]9)?[0-9]{9,10}$)',
+    );
+    return phoneRegExp.hasMatch(phone);
+  }
+
+  OutlineInputBorder outlineInputBorder(Color color) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(color: color, width: .6),
+      borderRadius: BorderRadius.circular(20.0),
+    );
   }
 }

@@ -20,7 +20,6 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     emitter(
       state.copyWith(
         phoneNumber: event.phoneNumber ?? "",
-        isPhoneValid: isPhoneValid(event.phoneNumber ?? ""),
       ),
     );
   }
@@ -29,7 +28,6 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     SendOtpToPhoneAuthEvent event,
     Emitter<PhoneAuthState> emitter,
   ) async {
-    print("phone number : ${state.phoneNumber} - valid: ${state.isPhoneValid}");
     FirebaseHelper.shared.verifyPhoneNumber(
       phoneNumber: state.phoneNumber ?? "",
       onVerificationCompleted: (AuthCredential authCredential) async {},
@@ -49,13 +47,6 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     VerificationFailedEvent event,
     Emitter<void> emitter,
   ) async {}
-
-  bool isPhoneValid(String phone) {
-    final RegExp phoneRegExp = RegExp(
-      r'(^(?:[+0]9)?[0-9]{9,10}$)',
-    );
-    return phoneRegExp.hasMatch(phone);
-  }
 
   static PhoneAuthBloc of(BuildContext context) =>
       BlocProvider.of<PhoneAuthBloc>(context);

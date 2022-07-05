@@ -33,6 +33,7 @@ class PhoneInputScreen extends StatelessWidget {
                             GetPhoneFromFieldAndValidateEvent(
                                 phoneNumber: phoneNumber),
                           ),
+                  
                   suffixIcon: InkWell(
                     onTap: () => getIt.get<PhoneAuthBloc>().add(
                           SendOtpToPhoneAuthEvent(
