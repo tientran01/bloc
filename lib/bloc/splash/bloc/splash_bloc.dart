@@ -13,7 +13,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _onAutoNavigationToLogin(
       AutoNavigationToLoginEvent event, Emitter<void> emitter) async {
     // await Future.delayed(const Duration(seconds: 2), () {
-    //   NavigationService.navigatorKey.currentState?.pushNamed('/login');
+    //   NavigationService.navigatorKey.currentState?.pushNamed(AppRouteName.login);
     // });
   }
 

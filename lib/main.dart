@@ -5,6 +5,7 @@ import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_bloc.dart';
 import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
 import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_bloc.dart';
 import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
+import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:bloc_demo/router/router_name.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: "/phone_input",
+      initialRoute: AppRouteName.phoneInput,
       routes: RouteName.route,
     );
   }

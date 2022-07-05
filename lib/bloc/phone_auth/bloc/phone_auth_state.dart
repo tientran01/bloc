@@ -1,41 +1,41 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class PhoneAuthState extends Equatable {
   final String? phoneNumber;
-  final AuthCredential? credential;
   final String? error;
   final String? otpCode;
   final String? verificationId;
   final int? token;
-  const PhoneAuthState({
-    this.phoneNumber,
-    this.credential,
-    this.error,
-    this.otpCode,
-    this.verificationId,
-    this.token,
-  });
+  final bool? isPhoneValid;
+  const PhoneAuthState(
+      {this.phoneNumber,
+      this.error,
+      this.otpCode,
+      this.verificationId,
+      this.token,
+      this.isPhoneValid});
 
   const PhoneAuthState.initState() : this();
 
-  PhoneAuthState copyWith(
-      {String? phoneNumber,
-      AuthCredential? credential,
-      String? error,
-      String? otpCode,
-      String? verificationId,
-      int? token}) {
+  PhoneAuthState copyWith({
+    String? phoneNumber,
+    String? error,
+    String? otpCode,
+    String? verificationId,
+    int? token,
+    bool? isPhoneValid,
+  }) {
     return PhoneAuthState(
-        phoneNumber: phoneNumber,
-        credential: credential,
-        error: error,
-        otpCode: otpCode,
-        verificationId: verificationId,
-        token: token);
+      phoneNumber: phoneNumber,
+      error: error,
+      otpCode: otpCode,
+      verificationId: verificationId,
+      token: token,
+      isPhoneValid: isPhoneValid,
+    );
   }
 
   @override
   List<Object?> get props =>
-      [phoneNumber, credential, error, otpCode, verificationId, token];
+      [phoneNumber, error, otpCode, verificationId, token, isPhoneValid];
 }

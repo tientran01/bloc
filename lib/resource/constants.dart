@@ -30,4 +30,5 @@ class Constants {
   static const String required = "Required";
   static const String error = "Error";
   static const String passwordError = "Enter a password with length at least 6";
+  static const String phoneGetOtp = "Code is sent to ";
 }

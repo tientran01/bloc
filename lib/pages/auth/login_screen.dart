@@ -27,12 +27,14 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 25.0, color: Colors.black)),
                   SizedBox(height: Constants.size30),
                   CustomTextField(
-                      type: TextFieldType.email,
-                      title: Constants.email,
-                      hintText: Constants.emailInput,
-                      suffixIcon: const Icon(Icons.email),
-                      onChanged: (String email) => getIt.get<LoginBloc>().add(
-                          GetEmailAndPasswordFormTextFieldEvent(email: email))),
+                    type: TextFieldType.email,
+                    title: Constants.email,
+                    hintText: Constants.emailInput,
+                    suffixIcon: const Icon(Icons.email),
+                    onChanged: (String email) => getIt.get<LoginBloc>().add(
+                          GetEmailAndPasswordFormTextFieldEvent(email: email),
+                        ),
+                  ),
                   CustomTextField(
                       title: Constants.password,
                       type: TextFieldType.password,

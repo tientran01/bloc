@@ -7,7 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
   VerifyOtpBloc() : super(const VerifyOtpState.initState()) {
+    on<GetOtpFormFieldEvent>(_onGetOtpFormField);
     on<ResendOtpCodeEvent>(_onResendOtpCode);
+    on<SignUpWithPhoneNumberEvent>(_onSignUpWithPhoneNumber);
+    on<VerifyOtpFailedEvent>(_onVerifyOtpFailed);
+  }
+
+  Future<void> _onGetOtpFormField(
+      GetOtpFormFieldEvent event, Emitter<void> emitter) async {
+    emitter(state.copyWith(otpCode: event.otpCode));
   }
 
   Future<void> _onResendOtpCode(
@@ -17,12 +25,18 @@ class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
       onVerificationCompleted: (AuthCredential authCredential) async {},
       onVerificationFailed: (FirebaseAuthException error) {},
       onCodeSent: (String? verificationID, int? resentToken) {
-        print(verificationID);
-        print(resentToken);
       },
       onCodeAutoRetrievalTimeout: (verificationID) {},
     );
   }
+
+  Future<void> _onSignUpWithPhoneNumber(
+      SignUpWithPhoneNumberEvent event, Emitter<void> emitter) async {
+    FirebaseHelper.shared.loginWithPhoneNumber(state.otpCode);
+  }
+
+  Future<void> _onVerifyOtpFailed(
+      VerifyOtpFailedEvent event, Emitter<void> emitter) async {}
 
   static VerifyOtpBloc of(BuildContext context) =>
       BlocProvider.of<VerifyOtpBloc>(context);
