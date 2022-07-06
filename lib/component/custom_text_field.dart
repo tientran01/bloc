@@ -79,11 +79,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   void changeSuffixIcon() {
-    setState(
-      () {
-        isHidden = !isHidden;
-      },
-    );
+    setState(() => isHidden = !isHidden);
   }
 
   Widget suffixIconPassword() {
