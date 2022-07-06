@@ -10,7 +10,6 @@ class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
     on<GetOtpFormFieldEvent>(_onGetOtpFormField);
     on<ResendOtpCodeEvent>(_onResendOtpCode);
     on<SignUpWithPhoneNumberEvent>(_onSignUpWithPhoneNumber);
-    on<VerifyOtpFailedEvent>(_onVerifyOtpFailed);
   }
 
   Future<void> _onGetOtpFormField(
@@ -34,9 +33,6 @@ class VerifyOtpBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
       SignUpWithPhoneNumberEvent event, Emitter<void> emitter) async {
     FirebaseHelper.shared.loginWithPhoneNumber(state.otpCode);
   }
-
-  Future<void> _onVerifyOtpFailed(
-      VerifyOtpFailedEvent event, Emitter<void> emitter) async {}
 
   static VerifyOtpBloc of(BuildContext context) =>
       BlocProvider.of<VerifyOtpBloc>(context);

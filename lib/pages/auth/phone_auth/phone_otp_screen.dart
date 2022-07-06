@@ -133,11 +133,11 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                 SizedBox(height: Constants.size30),
                 RichText(
                     text: TextSpan(children: [
-                  TextSpan(text: "Send OTP again in ", style: AppStyle.title),
+                  TextSpan(text: Constants.resendOtpCode, style: AppStyle.title),
                   TextSpan(
                       text: time,
                       style: AppStyle.title.copyWith(color: Colors.red)),
-                  TextSpan(text: " sec", style: AppStyle.title)
+                  TextSpan(text: Constants.sec, style: AppStyle.title)
                 ]))
               ],
             ),

@@ -41,4 +41,6 @@ class Constants {
   static const String signUpWithPhoneNumber = "Sign Up With Phone Number";
   static const String resetPassword = "Reset Password";
   static const String createNewPassword = "Create New Password";
+  static const String resendOtpCode = "Send OTP again in";
+  static const String sec = "sec";
 }
