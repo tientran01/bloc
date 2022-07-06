@@ -3,19 +3,21 @@ import 'package:equatable/equatable.dart';
 class LoginState extends Equatable {
   final String? password;
   final String? email;
-
-  const LoginState(
-      {this.password, this.email});
+  const LoginState({
+    this.password,
+    this.email,
+  });
 
   const LoginState.initState() : this();
 
-  LoginState copyWith(
-      {String? isLoading,
-      String? password,
-      String? email}) {
+  LoginState copyWith({
+    String? password,
+    String? email,
+  }) {
     return LoginState(
-        password: password,
-        email: email);
+      password: password,
+      email: email,
+    );
   }
 
   @override

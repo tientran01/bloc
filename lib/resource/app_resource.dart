@@ -9,4 +9,6 @@ class AppResource {
   static String twitterIcon = '${baseIconPath}ic_twitter.png';
   static String phoneIcon = '${baseIconPath}ic_phone.png';
   static String sendIcon = '${baseIconPath}ic_send.png';
+  static String leftArrow = '${baseIconPath}ic_left_arrow.png';
+  static String rightArrow = '${baseIconPath}ic_right_arrow.png';
 }

@@ -1,6 +1,7 @@
 import 'package:bloc_demo/bloc/login/bloc/login_event.dart';
 import 'package:bloc_demo/bloc/login/bloc/login_state.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
+import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,22 +17,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _onGetEmailAndPasswordFormTextField(
       GetEmailAndPasswordFormTextFieldEvent event, Emitter<void> emit) async {
-    emit(state.copyWith(
-      email: event.email ?? state.email,
-      password: event.password ?? state.password,
-    ));
+    emit(
+      state.copyWith(
+        email: event.email ?? state.email,
+        password: event.password ?? state.password,
+      ),
+    );
   }
 
   Future<User?> _onSubmitLoginWithFirebase(
       SubmitLoginWithFirebaseEvent event, Emitter<void> emitter) async {
     try {
-      User? user = await FirebaseHelper.shared.login(
+      User? user = await FirebaseHelper.shared.loginWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
       if (user != null) {
         NavigationService.navigatorKey.currentState
-            ?.pushNamed("/show_information");
+            ?.pushNamed(AppRouteName.showInformation);
         return Future.value(user);
       }
       return Future.error("User is null after creating an account");
@@ -42,19 +45,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _onClickSignUp(
       ClickSignUpEvent event, Emitter<void> emitter) async {
-    NavigationService.navigatorKey.currentState?.pushNamed("/sign_up");
+    NavigationService.navigatorKey.currentState?.pushNamed(AppRouteName.signUp);
   }
 
   static LoginBloc of(BuildContext context) =>
       BlocProvider.of<LoginBloc>(context);
-
-  // Future<void> _onSubmitLogin(
-  //     SubmitLoginEvent event, Emitter<void> emitter) async {
-  //   try {
-  //     ApiClient.api.login(state.email, state.password).then((value) =>
-  //         NavigationService.navigatorKey.currentState?.pushNamed("/home"));
-  //   } catch (e) {
-  //     Text(e.toString());
-  //   }
-  // }
 }

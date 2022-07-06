@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -5,11 +6,13 @@ class FirebaseHelper {
   static final FirebaseHelper shared = FirebaseHelper._internal();
   FirebaseHelper._internal();
   String? verificationId;
+  int? resendToken;
   late PhoneAuthCredential phoneAuthCredential;
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<User?> login({String? email, String? password}) async {
+  Future<User?> loginWithEmailAndPassword(
+      {String? email, String? password}) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -20,7 +23,8 @@ class FirebaseHelper {
     return user;
   }
 
-  Future<User?> signUp({String? email, String? password}) async {
+  Future<User?> signUpWithEmailAndPassword(
+      {String? email, String? password}) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -40,18 +44,21 @@ class FirebaseHelper {
   }) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "+84 $phoneNumber",
-      timeout: const Duration(seconds: 10),
+      timeout: const Duration(seconds: 30),
       verificationCompleted: (PhoneAuthCredential authCredential) {
         phoneAuthCredential = authCredential;
       },
-      verificationFailed: (FirebaseAuthException e) {
-        print(e);
-      },
+      verificationFailed: (FirebaseAuthException e) {},
       codeSent: (String verificationID, int? resendCode) {
         verificationId = verificationID;
+        resendToken = resendCode;
         onCodeSent(verificationID, resendCode);
       },
-      codeAutoRetrievalTimeout: onCodeAutoRetrievalTimeout,
+      forceResendingToken: resendToken,
+      codeAutoRetrievalTimeout: (String verificationID) {
+        verificationId = verificationID;
+        print("Timeout");
+      },
     );
   }
 
@@ -65,15 +72,13 @@ class FirebaseHelper {
     try {
       var result =
           await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+      print(result.user);
       if (result.user != null) {
         NavigationService.navigatorKey.currentState
             ?.pushNamed("/show_information");
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-verification-code') {
-        print(e.code);
-      }
-      print('error${e.code}');
+      print(e.code);
     } catch (e) {
       print('error${e.toString()}');
     }

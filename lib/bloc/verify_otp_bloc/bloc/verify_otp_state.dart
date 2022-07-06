@@ -1,16 +1,30 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../helper/enum.dart';
+
 class VerifyOtpState extends Equatable {
   final String? phoneNumber;
-  const VerifyOtpState({this.phoneNumber});
+  final String? otpCode;
+  final FirebaseExceptionType? error;
+  const VerifyOtpState({
+    this.phoneNumber,
+    this.otpCode,
+    this.error
+  });
   const VerifyOtpState.initState() : this();
 
-  VerifyOtpState copyWith({String? phoneNumber}) {
+  VerifyOtpState copyWith({
+    String? phoneNumber,
+    String? otpCode,
+    FirebaseExceptionType? error,
+  }) {
     return VerifyOtpState(
-      phoneNumber: phoneNumber
+      phoneNumber: phoneNumber,
+      otpCode: otpCode,
+      error: error
     );
   }
 
   @override
-  List<Object?> get props => [phoneNumber];
+  List<Object?> get props => [phoneNumber, otpCode, error];
 }

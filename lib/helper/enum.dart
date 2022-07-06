@@ -2,5 +2,6 @@ enum FirebaseExceptionType {
   invalid,
   request,
   network,
-  exceeded
+  exceeded,
+  invalidVerificationCode
 }

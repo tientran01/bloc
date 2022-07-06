@@ -1,9 +1,13 @@
+import 'package:bloc_demo/resource/app_color.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 enum TextFieldType {
   email,
   password,
   normal,
+  phoneNumber,
 }
 
 class CustomTextField extends StatefulWidget {
@@ -16,7 +20,8 @@ class CustomTextField extends StatefulWidget {
   final Function()? onTapSuffixIcon;
   final TextFieldType type;
   final TextInputType? keyboardType;
-  final String? errorText;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? textEditingController;
 
   const CustomTextField({
     Key? key,
@@ -28,7 +33,9 @@ class CustomTextField extends StatefulWidget {
     this.type = TextFieldType.normal,
     this.onTapSuffixIcon,
     this.prefixIcon,
-    this.keyboardType, this.errorText,
+    this.keyboardType,
+    this.inputFormatters,
+    this.textEditingController,
   }) : super(key: key);
 
   @override
@@ -47,27 +54,36 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.textEditingController,
       keyboardType: widget.keyboardType,
       obscureText: isHidden,
       decoration: InputDecoration(
-        errorText: widget.errorText,
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
         labelText: widget.title,
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon ??
             GestureDetector(
-                onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
-                child: suffixIconPassword()),
+              onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
+              child: suffixIconPassword(),
+            ),
+        border: outlineInputBorder(color: Colors.transparent),
+        focusedBorder: outlineInputBorder(color: AppColor.hFF9F29),
       ),
       onChanged: widget.onChanged,
+      inputFormatters: widget.inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: validatorText,
     );
   }
 
   void changeSuffixIcon() {
-    setState(() {
-      isHidden = !isHidden;
-    });
+    setState(
+      () {
+        isHidden = !isHidden;
+      },
+    );
   }
 
   Widget suffixIconPassword() {
@@ -79,5 +95,63 @@ class _CustomTextFieldState extends State<CustomTextField> {
       }
     }
     return Container();
+  }
+
+  String? validatorText(String? value) {
+    switch (widget.type) {
+      case TextFieldType.email:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isEmailValid(value)) {
+          return Constants.emailInvalid;
+        }
+        break;
+      case TextFieldType.password:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isPasswordValid(value)) {
+          return Constants.passwordInvalid;
+        }
+        break;
+      case TextFieldType.normal:
+        break;
+      case TextFieldType.phoneNumber:
+        if (value == null || value.isEmpty) {
+          return Constants.required;
+        } else if (!isPhoneValid(value)) {
+          return Constants.phoneInvalid;
+        }
+        break;
+    }
+    return null;
+  }
+
+  bool isEmailValid(String email) {
+    final emailRegExp = RegExp(
+      r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
+    return emailRegExp.hasMatch(email);
+  }
+
+  bool isPasswordValid(String password) {
+    final RegExp passwordRegExp = RegExp(
+      r'^(?=.*\d).{8,15}$',
+    );
+    return passwordRegExp.hasMatch(password);
+  }
+
+  bool isPhoneValid(String phone) {
+    final RegExp phoneRegExp = RegExp(
+      r'(^(?:[+0]9)?[0-9]{9,10}$)',
+    );
+    return phoneRegExp.hasMatch(phone);
+  }
+
+  OutlineInputBorder outlineInputBorder({Color? color}) {
+    return OutlineInputBorder(
+      borderSide:
+          BorderSide(color: color ?? AppColor.borderOTPColor, width: 1.0),
+      borderRadius: BorderRadius.circular(20.0),
+    );
   }
 }

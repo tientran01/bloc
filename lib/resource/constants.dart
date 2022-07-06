@@ -1,6 +1,7 @@
 class Constants {
   static double size30 = 30.0;
   static double size10 = 10.0;
+  static double heightAppBar = 80.0;
 
   static const String username = "Username";
   static const String usernameInput = "Enter your username";
@@ -16,11 +17,10 @@ class Constants {
   static const String confirmPasswordInput = "Enter password again";
   static const String login = "Login";
   static const String signUp = "Sign Up";
-  static const String signUpWithPhone = "Sign Up With Phone Number";
   static const String signOut = "Sign Out";
   static const String noAccount = "Don't have account?";
   static const String haveAccount = "Already have an account?";
-  static const String forgetPassword = "Forget password.";
+  static const String forgetPassword = "Forget password?";
   static const String or = 'OR';
   static const String send = "Send";
   static const String requestInputOTP = "Enter your 6 digit OTP";
@@ -28,6 +28,17 @@ class Constants {
   static const String requestAgain = "Request again";
   static const String verifyPhone = "Verify Phone";
   static const String required = "Required";
-  static const String error = "Error";
   static const String passwordError = "Enter a password with length at least 6";
+  static const String phoneGetOtp = "Code is sent to ";
+  static const String emailInvalid = "Invalid email";
+  static const String phoneInvalid = "Invalid phone";
+  static const String passwordInvalid =
+      "Invalid password. Password have 8 - 15 characters!";
+  static const String loginFail = "Login Fail";
+  static const String loginSuccess = "Login Success";
+  static const String signInWithGoogle = "Sign in with google";
+  static const String signInWithPhoneNumber = "Sign In With Phone Number";
+  static const String signUpWithPhoneNumber = "Sign Up With Phone Number";
+  static const String resetPassword = "Reset Password";
+  static const String createNewPassword = "Create New Password";
 }

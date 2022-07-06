@@ -15,13 +15,8 @@ class GetEmailAndPasswordFormTextFieldEvent extends LoginEvent {
   });
 
   @override
-  List<Object?> get props => [
-        email,
-        password,
-      ];
+  List<Object?> get props => [email, password];
 }
-
-class SubmitLoginEvent extends LoginEvent {}
 
 class SubmitLoginWithFirebaseEvent extends LoginEvent {}
 

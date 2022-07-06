@@ -1,7 +1,9 @@
+import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
+import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +17,8 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.signUpWithPhone),
+      appBar: CustomAppBar(
+        leadingIconPath: AppResource.leftArrow,
       ),
       body: BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
         builder: (_, state) {
@@ -25,8 +27,16 @@ class PhoneInputScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  Constants.signUpWithPhoneNumber.toUpperCase(),
+                  style: AppStyle.header.copyWith(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: Constants.size30),
                 CustomTextField(
-                  keyboardType: TextInputType.phone,
+                  type: TextFieldType.phoneNumber,
                   hintText: Constants.phoneInput,
                   onChanged: (String phoneNumber) =>
                       getIt.get<PhoneAuthBloc>().add(
@@ -36,7 +46,8 @@ class PhoneInputScreen extends StatelessWidget {
                   suffixIcon: InkWell(
                     onTap: () => getIt.get<PhoneAuthBloc>().add(
                           SendOtpToPhoneAuthEvent(
-                              phoneNumber: state.phoneNumber),
+                            phoneNumber: state.phoneNumber,
+                          ),
                         ),
                     customBorder: const CircleBorder(),
                     splashColor: AppColor.h413F42,
