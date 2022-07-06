@@ -3,7 +3,8 @@ import 'package:bloc_demo/bloc/splash/bloc/splash_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import '../../../router/navigation_service.dart';
+import '../../../resource/app_route_name.dart';
+import '../../../router/navigation_service.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(const SplashState.initstate()) {
@@ -12,9 +13,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onAutoNavigationToLogin(
       AutoNavigationToLoginEvent event, Emitter<void> emitter) async {
-    // await Future.delayed(const Duration(seconds: 2), () {
-    //   NavigationService.navigatorKey.currentState?.pushNamed(AppRouteName.login);
-    // });
+    await Future.delayed(const Duration(seconds: 2), () {
+      NavigationService.navigatorKey.currentState
+          ?.pushNamed(AppRouteName.login);
+    });
   }
 
   static SplashBloc of(BuildContext context) =>

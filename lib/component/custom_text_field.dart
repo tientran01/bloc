@@ -21,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final TextFieldType type;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? textEditingController;
 
   const CustomTextField({
     Key? key,
@@ -34,6 +35,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.keyboardType,
     this.inputFormatters,
+    this.textEditingController,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,6 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   TextFieldType? type;
   bool isHidden = false;
-  bool isValid = false;
   @override
   void initState() {
     super.initState();
@@ -53,10 +54,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.textEditingController,
       keyboardType: widget.keyboardType,
       obscureText: isHidden,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
         labelText: widget.title,
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon,
@@ -65,15 +68,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
               onTap: widget.onTapSuffixIcon ?? changeSuffixIcon,
               child: suffixIconPassword(),
             ),
-        border: outlineInputBorder(AppColor.hFF9F29),
-        enabledBorder: outlineInputBorder(AppColor.borderOTPColor),
-        focusedBorder: outlineInputBorder(Colors.blueGrey),
-        errorBorder: outlineInputBorder(Colors.red.shade800)
+        border: outlineInputBorder(color: Colors.transparent),
+        focusedBorder: outlineInputBorder(color: AppColor.hFF9F29),
       ),
       onChanged: widget.onChanged,
       inputFormatters: widget.inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) => validatorText(value),
+      validator: validatorText,
     );
   }
 
@@ -96,7 +97,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Container();
   }
 
-  String validatorText(String? value) {
+  String? validatorText(String? value) {
     switch (widget.type) {
       case TextFieldType.email:
         if (value == null || value.isEmpty) {
@@ -122,7 +123,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         }
         break;
     }
-    return "";
+    return null;
   }
 
   bool isEmailValid(String email) {
@@ -134,7 +135,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   bool isPasswordValid(String password) {
     final RegExp passwordRegExp = RegExp(
-      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
+      r'^(?=.*\d).{8,15}$',
     );
     return passwordRegExp.hasMatch(password);
   }
@@ -146,9 +147,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return phoneRegExp.hasMatch(phone);
   }
 
-  OutlineInputBorder outlineInputBorder(Color color) {
+  OutlineInputBorder outlineInputBorder({Color? color}) {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: color, width: .6),
+      borderSide:
+          BorderSide(color: color ?? AppColor.borderOTPColor, width: 1.0),
       borderRadius: BorderRadius.circular(20.0),
     );
   }

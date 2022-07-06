@@ -9,4 +9,6 @@ class AppRouteName {
   static const String showInformation = "/show_information";
   static const String phoneInput = "/phone_input";
   static const String phoneOtp = "/phone_otp";
+  static const String inputEmailReset = "/input_email_reset";
+  static const String createNewPassword = "/create_new_password";
 }

@@ -1,3 +1,5 @@
+import 'package:bloc_demo/pages/auth/forget_password/input_email_reset_screen.dart';
+import 'package:bloc_demo/pages/auth/forget_password/create_new_password_screen.dart';
 import 'package:bloc_demo/pages/auth/phone_auth/phone_input_screen.dart';
 import 'package:bloc_demo/pages/auth/phone_auth/phone_otp_screen.dart';
 import 'package:bloc_demo/pages/auth/sign_up_screen.dart';
@@ -15,7 +17,7 @@ class RouteName {
   static Map<String, WidgetBuilder> route = {
     AppRouteName.splash: (BuildContext context) => const SplashScreen(),
     AppRouteName.login: (BuildContext context) => const LoginScreen(),
-    AppRouteName.signUp: (BuildContext context) => const SignUpScreen(),
+    AppRouteName.signUp: (BuildContext context) =>  SignUpScreen(),
     AppRouteName.home: (BuildContext context) => const HomeScreen(),
     AppRouteName.profile: (BuildContext context) => const ProfileScreen(),
     AppRouteName.demoCubit: (BuildContext context) => const DemoCubitScreen(),
@@ -24,5 +26,7 @@ class RouteName {
         const ShowInformationScreen(),
     AppRouteName.phoneInput: (BuildContext context) => const PhoneInputScreen(),
     AppRouteName.phoneOtp: (BuildContext context) => const PhoneOTPScreen(),
+    AppRouteName.inputEmailReset: (BuildContext context) => const InputEmailResetScreen(),
+    AppRouteName.createNewPassword: (BuildContext context) => const CreateNewPasswordScreen()
   };
 }

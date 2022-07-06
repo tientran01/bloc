@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_bloc.dart';
 import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_event.dart';
 import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_state.dart';
+import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_otp_field.dart';
 import 'package:bloc_demo/main.dart';
@@ -10,6 +11,8 @@ import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../resource/app_resource.dart';
 
 class PhoneOTPScreen extends StatefulWidget {
   const PhoneOTPScreen({Key? key}) : super(key: key);
@@ -33,7 +36,6 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
 
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      print(timer.tick);
       if (timer.tick >= max) {
         setState(() {
           time = '00:00';
@@ -57,10 +59,11 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // String phoneNumber = ModalRoute.of(context)?.settings.arguments as String;
+    String phoneNumber = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.verifyPhone),
+      appBar: CustomAppBar(
+        leadingIconPath: AppResource.leftArrow,
+        title: Constants.verifyPhone,
       ),
       body: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
         builder: (_, state) {
@@ -71,10 +74,10 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Text(
-                //   "${Constants.phoneGetOtp} $phoneNumber",
-                //   style: AppStyle.title,
-                // ),
+                Text(
+                  "${Constants.phoneGetOtp} $phoneNumber",
+                  style: AppStyle.title,
+                ),
                 SizedBox(height: Constants.size30),
                 Container(
                   alignment: Alignment.center,
@@ -102,7 +105,9 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                       child: GestureDetector(
                         onTap: () {
                           pinController.clear();
-                          getIt.get<VerifyOtpBloc>().add(ResendOtpCodeEvent());
+                          getIt.get<VerifyOtpBloc>().add(ResendOtpCodeEvent(
+                                phoneNumber: phoneNumber,
+                              ));
                           startTimer();
                         },
                         child: Text(

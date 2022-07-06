@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRouteName.login,
+      initialRoute: AppRouteName.splash,
       routes: RouteName.route,
     );
   }
