@@ -43,4 +43,7 @@ class Constants {
   static const String createNewPassword = "Create New Password";
   static const String resendOtpCode = "Send OTP again in";
   static const String sec = "sec";
+  static const String success = "Success";
+  static const String loading = "Loading";
+  static const String error = "Error";
 }

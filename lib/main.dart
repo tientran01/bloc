@@ -1,3 +1,4 @@
+import 'package:bloc_demo/bloc/foget_password/bloc/forget_password_bloc.dart';
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
 import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
 import 'package:bloc_demo/bloc/phone_auth/bloc/phone_auth_bloc.dart';
@@ -11,6 +12,7 @@ import 'package:bloc_demo/router/router_name.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'bloc/login/bloc/login_bloc.dart';
 
@@ -24,6 +26,7 @@ Future<void> main() async {
   getIt.registerLazySingleton<InformationBloc>(() => InformationBloc());
   getIt.registerLazySingleton<PhoneAuthBloc>(() => PhoneAuthBloc());
   getIt.registerLazySingleton<VerifyOtpBloc>(() => VerifyOtpBloc());
+  getIt.registerLazySingleton<ForgetPasswordBloc>(() => ForgetPasswordBloc());
   runApp(
     MultiBlocProvider(
       providers: [
@@ -34,7 +37,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => InformationBloc()),
         BlocProvider(create: (_) => DemoCubit()),
         BlocProvider(create: (_) => PhoneAuthBloc()),
-        BlocProvider(create: (_) => VerifyOtpBloc())
+        BlocProvider(create: (_) => VerifyOtpBloc()),
+        BlocProvider(create: (_) => ForgetPasswordBloc())
       ],
       child: const MyApp(),
     ),
@@ -51,6 +55,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRouteName.splash,
       routes: RouteName.route,
+      builder: EasyLoading.init(),
     );
   }
 }

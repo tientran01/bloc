@@ -87,4 +87,8 @@ class FirebaseHelper {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+  Future<void> resetPasswordWithEmail({String? email}) async {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email ?? "");
+  }
 }

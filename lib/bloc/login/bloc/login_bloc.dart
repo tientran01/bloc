@@ -6,6 +6,9 @@ import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../../../resource/constants.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState.initState()) {
@@ -33,12 +36,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: state.password,
       );
       if (user != null) {
+        EasyLoading.showSuccess(Constants.success);
         NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.showInformation);
         return Future.value(user);
       }
       return Future.error("User is null after creating an account");
     } on FirebaseAuthException catch (e) {
+      EasyLoading.showError(Constants.error);
       return Future.error(e.message!);
     }
   }
