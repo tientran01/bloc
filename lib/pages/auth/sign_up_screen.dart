@@ -1,8 +1,8 @@
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
-import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/resource/app_style.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/sign_up/bloc/sign_up_bloc.dart';
 import '../../bloc/sign_up/bloc/sign_up_event.dart';
 import '../../bloc/sign_up/bloc/sign_up_state.dart';
+import '../../resource/app_strings.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -30,14 +31,14 @@ class SignUpScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Constants.signUp,
+                    AppStrings.signUp,
                     style: AppStyle.header,
                   ),
                   SizedBox(height: Constants.size30),
                   CustomTextField(
                     type: TextFieldType.email,
-                    title: Constants.email,
-                    hintText: Constants.emailInput,
+                    title: AppStrings.email,
+                    hintText: AppStrings.emailInput,
                     suffixIcon: const Icon(Icons.email),
                     onChanged: (String email) => getIt.get<SignUpBloc>().add(
                           GetEmailAndPasswordFormTextFieldEvent(email: email),
@@ -47,8 +48,8 @@ class SignUpScreen extends StatelessWidget {
                   CustomTextField(
                     textEditingController: passwordController,
                     type: TextFieldType.password,
-                    title: Constants.password,
-                    hintText: Constants.usernameInput,
+                    title: AppStrings.password,
+                    hintText: AppStrings.usernameInput,
                     onChanged: (String password) => getIt.get<SignUpBloc>().add(
                           GetEmailAndPasswordFormTextFieldEvent(
                             password: password,
@@ -57,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SizedBox(height: Constants.size30),
                   CustomButton(
-                    text: Constants.signUp,
+                    text: AppStrings.signUp,
                     onTap: () {
                       trySignUp();
                     },
@@ -67,14 +68,14 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        Constants.haveAccount,
+                        AppStrings.haveAccount,
                         style: AppStyle.lightTitle,
                       ),
                       GestureDetector(
                         onTap: () => NavigationService.navigatorKey.currentState
                             ?.pushNamed("/login"),
                         child: Text(
-                          Constants.login,
+                          AppStrings.login,
                           style: AppStyle.title,
                         ),
                       )

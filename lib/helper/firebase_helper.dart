@@ -2,11 +2,12 @@
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
-import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../resource/app_strings.dart';
 
 class FirebaseHelper {
   static final FirebaseHelper shared = FirebaseHelper._internal();
@@ -65,7 +66,6 @@ class FirebaseHelper {
       forceResendingToken: resendToken,
       codeAutoRetrievalTimeout: (String verificationID) {
         verificationId = verificationID;
-        print("Timeout");
       },
     );
   }
@@ -104,7 +104,7 @@ class FirebaseHelper {
   Future<User?> signInWithGoogle() async {
     User? user;
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    Loading.show(Constants.loading);
+    Loading.show(AppStrings.loading);
     if (googleUser != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleUser.authentication;
@@ -120,7 +120,7 @@ class FirebaseHelper {
         NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.googleShowInformation, arguments: user);
       } on FirebaseException catch (e) {
-        Loading.showError(Constants.error);
+        Loading.showError(AppStrings.error);
         if (e.code == Error.accountExist) {
           print(Error.accountExist);
         } else if (e.code == Error.invalidCredential) {
@@ -150,7 +150,7 @@ class FirebaseHelper {
           arguments: user,
         );
       } else {
-        print(Constants.error);
+        print(AppStrings.error);
       }
     }
   }

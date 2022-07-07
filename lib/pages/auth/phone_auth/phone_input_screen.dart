@@ -3,6 +3,7 @@ import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
+import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class PhoneInputScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  Constants.signInWithPhoneNumber.toUpperCase(),
+                  AppStrings.signInWithPhoneNumber.toUpperCase(),
                   style: AppStyle.header.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -35,7 +36,7 @@ class PhoneInputScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 CustomTextField(
                   type: TextFieldType.phoneNumber,
-                  hintText: Constants.phoneInput,
+                  hintText: AppStrings.phoneInput,
                   onChanged: (String phoneNumber) =>
                       getIt.get<PhoneAuthBloc>().add(
                             GetPhoneFromFieldAndValidateEvent(

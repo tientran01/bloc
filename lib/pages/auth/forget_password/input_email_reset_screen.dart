@@ -9,8 +9,8 @@ import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../bloc/foget_password/bloc/forget_password_state.dart';
+import '../../../resource/app_strings.dart';
 
 class InputEmailResetScreen extends StatelessWidget {
   const InputEmailResetScreen({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class InputEmailResetScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    Constants.forgetPassword,
+                    AppStrings.forgetPassword,
                     style: AppStyle.header.copyWith(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -42,8 +42,8 @@ class InputEmailResetScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 CustomTextField(
                   type: TextFieldType.email,
-                  title: Constants.email,
-                  hintText: Constants.emailInput,
+                  title: AppStrings.email,
+                  hintText: AppStrings.emailInput,
                   suffixIcon: const Icon(Icons.email),
                   onChanged: (String email) {
                     getIt.get<ForgetPasswordBloc>().add(
@@ -53,8 +53,10 @@ class InputEmailResetScreen extends StatelessWidget {
                 ),
                 SizedBox(height: Constants.size30),
                 CustomButton(
-                  text: Constants.send,
-                  onTap: () => getIt.get<ForgetPasswordBloc>().add(SendEmailEvent()),
+                  text: AppStrings.send,
+                  onTap: () => getIt.get<ForgetPasswordBloc>().add(
+                        SendEmailEvent(),
+                      ),
                 )
               ],
             ),

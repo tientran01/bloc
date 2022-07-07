@@ -5,8 +5,8 @@ import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
-import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/resource/app_style.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +15,7 @@ import '../../component/custom_divider.dart';
 import '../../component/custom_social_button.dart';
 import '../../resource/app_resource.dart';
 import '../../resource/app_route_name.dart';
+import '../../resource/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -47,15 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      Constants.login,
+                      AppStrings.login,
                       style: TextStyle(fontSize: 25.0, color: Colors.black),
                     ),
                     SizedBox(height: Constants.size30),
                     CustomTextField(
                       textEditingController: emailController,
                       type: TextFieldType.email,
-                      title: Constants.email,
-                      hintText: Constants.emailInput,
+                      title: AppStrings.email,
+                      hintText: AppStrings.emailInput,
                       suffixIcon: const Icon(Icons.email),
                       onChanged: (email) => getIt.get<LoginBloc>().add(
                             GetEmailAndPasswordFormTextFieldEvent(email: email),
@@ -64,9 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: Constants.size10),
                     CustomTextField(
                       textEditingController: passwordController,
-                      title: Constants.password,
+                      title: AppStrings.password,
                       type: TextFieldType.password,
-                      hintText: Constants.passwordInput,
+                      hintText: AppStrings.passwordInput,
                       onChanged: (String password) =>
                           getIt.get<LoginBloc>().add(
                                 GetEmailAndPasswordFormTextFieldEvent(
@@ -76,14 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     buildForgetPassword(),
                     SizedBox(height: Constants.size30),
                     CustomButton(
-                      text: Constants.login,
+                      text: AppStrings.login,
                       onTap: () {
                         tryLogin();
                       },
                     ),
                     SizedBox(height: Constants.size30),
                     const CustomDivider(
-                      textDisplay: Constants.or,
+                      textDisplay: AppStrings.or,
                       isOr: true,
                     ),
                     SizedBox(height: Constants.size30),
@@ -118,14 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Constants.noAccount,
+                          AppStrings.noAccount,
                           style: AppStyle.lightTitle,
                         ),
                         GestureDetector(
                           onTap: () =>
                               getIt.get<LoginBloc>().add(SignUpEvent()),
                           child: Text(
-                            Constants.signUp,
+                            AppStrings.signUp,
                             style: AppStyle.title,
                           ),
                         ),
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       getIt.get<LoginBloc>().add(LoginWithFirebaseEvent());
     } else {
-      showSnackBar(Constants.loginFail);
+      showSnackBar(AppStrings.loginFail);
       passwordController.clear();
     }
   }
@@ -167,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
         margin: const EdgeInsets.only(top: 10.0, right: 10.0),
         alignment: Alignment.bottomRight,
         child: Text(
-          Constants.forgetPassword,
+          AppStrings.forgetPassword,
           style: AppStyle.title.copyWith(
             fontSize: 16,
             decoration: TextDecoration.underline,

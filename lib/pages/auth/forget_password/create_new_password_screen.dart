@@ -1,14 +1,14 @@
 import 'package:bloc_demo/bloc/foget_password/bloc/forget_password_bloc.dart';
 import 'package:bloc_demo/component/custom_app_bar.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../bloc/foget_password/bloc/forget_password_state.dart';
 import '../../../component/custom_button.dart';
 import '../../../component/custom_text_field.dart';
 import '../../../resource/app_resource.dart';
+import '../../../resource/app_strings.dart';
 import '../../../resource/app_style.dart';
-import '../../../resource/constants.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {
   const CreateNewPasswordScreen({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    Constants.createNewPassword,
+                    AppStrings.createNewPassword,
                     style: AppStyle.header.copyWith(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -40,18 +40,18 @@ class CreateNewPasswordScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 const CustomTextField(
                   type: TextFieldType.password,
-                  title: Constants.password,
-                  hintText: Constants.passwordInput,
+                  title: AppStrings.password,
+                  hintText: AppStrings.passwordInput,
                 ),
                 SizedBox(height: Constants.size10),
                 const CustomTextField(
                   type: TextFieldType.password,
-                  title: Constants.confirmPassword,
-                  hintText: Constants.confirmPassword,
+                  title: AppStrings.confirmPassword,
+                  hintText: AppStrings.confirmPassword,
                 ),
                 SizedBox(height: Constants.size30),
                 const CustomButton(
-                  text: Constants.resetPassword,
+                  text: AppStrings.resetPassword,
                 )
               ],
             ),

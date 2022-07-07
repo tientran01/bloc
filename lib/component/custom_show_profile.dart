@@ -1,9 +1,10 @@
 import 'package:bloc_demo/component/custom_button.dart';
+import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../resource/app_color.dart';
+import '../resource/app_strings.dart';
 import '../resource/app_style.dart';
-import '../resource/constants.dart';
 
 class CustomShowProfile extends StatelessWidget {
   final String? photoURL;
@@ -65,7 +66,7 @@ class CustomShowProfile extends StatelessWidget {
               style: AppStyle.title,
             ),
             CustomButton(
-              text: Constants.signOut,
+              text: AppStrings.signOut,
               bgColor: AppColor.h413F42,
               onTap: onPressed,
             ),

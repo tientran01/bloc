@@ -1,7 +1,8 @@
 import 'package:bloc_demo/resource/app_color.dart';
-import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../resource/app_strings.dart';
 
 enum TextFieldType {
   email,
@@ -97,25 +98,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
     switch (widget.type) {
       case TextFieldType.email:
         if (value == null || value.isEmpty) {
-          return Constants.required;
+          return AppStrings.required;
         } else if (!isEmailValid(value)) {
-          return Constants.emailInvalid;
+          return AppStrings.emailInvalid;
         }
         break;
       case TextFieldType.password:
         if (value == null || value.isEmpty) {
-          return Constants.required;
+          return AppStrings.required;
         } else if (!isPasswordValid(value)) {
-          return Constants.passwordInvalid;
+          return AppStrings.passwordInvalid;
         }
         break;
       case TextFieldType.normal:
         break;
       case TextFieldType.phoneNumber:
         if (value == null || value.isEmpty) {
-          return Constants.required;
+          return AppStrings.required;
         } else if (!isPhoneValid(value)) {
-          return Constants.phoneInvalid;
+          return AppStrings.phoneInvalid;
         }
         break;
     }

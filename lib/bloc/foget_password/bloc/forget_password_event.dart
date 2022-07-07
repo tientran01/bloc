@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 abstract class ForgetPasswordEvent extends Equatable {
   const ForgetPasswordEvent();
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class GetEmailAndCheckValidEvent extends ForgetPasswordEvent {

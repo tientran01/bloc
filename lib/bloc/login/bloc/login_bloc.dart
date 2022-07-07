@@ -1,14 +1,14 @@
 import 'package:bloc_demo/bloc/login/bloc/login_event.dart';
 import 'package:bloc_demo/bloc/login/bloc/login_state.dart';
+import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../helper/loading.dart';
-import '../../../resource/constants.dart';
+import '../../../resource/app_strings.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState.initState()) {
@@ -35,20 +35,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<User?> _onLoginWithFirebase(
       LoginWithFirebaseEvent event, Emitter<void> emitter) async {
     try {
-      Loading.show(Constants.loading);
+      Loading.show(AppStrings.loading);
       User? user = await FirebaseHelper.shared.loginWithEmailAndPassword(
         email: state.email,
         password: state.password,
       );
       if (user != null) {
-        Loading.show(Constants.success);
+        Loading.show(AppStrings.success);
         NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.showInformation);
         return Future.value(user);
       }
-      return Future.error("User is null after creating an account");
+      return Future.error(Error.loginWithFirebaseError);
     } on FirebaseAuthException catch (e) {
-      Loading.showError(Constants.error);
+      Loading.showError(AppStrings.error);
       return Future.error(e.message!);
     }
   }
