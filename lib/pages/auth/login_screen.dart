@@ -11,6 +11,9 @@ import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../component/custom_divider.dart';
+import '../../component/custom_social_button.dart';
+import '../../resource/app_resource.dart';
 import '../../resource/app_route_name.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -74,10 +77,41 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: Constants.size30),
                     CustomButton(
                       text: Constants.login,
-                      bgColor: AppColor.hE2703A,
                       onTap: () {
                         tryLogin();
                       },
+                    ),
+                    SizedBox(height: Constants.size30),
+                    const CustomDivider(
+                      textDisplay: Constants.or,
+                      isOr: true,
+                    ),
+                    SizedBox(height: Constants.size30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomSocialButton(
+                          socialIconPath: AppResource.phoneIcon,
+                          onTap: () => getIt
+                              .get<LoginBloc>()
+                              .add(SignInWithPhoneNumberEvent()),
+                        ),
+                        SizedBox(width: Constants.size10),
+                        CustomSocialButton(
+                          socialIconPath: AppResource.facebookIcon,
+                          onTap: () => getIt.get<LoginBloc>().add(
+                                SignInWithFacebookEvent(),
+                              ),
+                        ),
+                        SizedBox(width: Constants.size10),
+                        CustomSocialButton(
+                          socialIconPath: AppResource.googleIcon,
+                          onTap: () => getIt.get<LoginBloc>().add(
+                                SignInWithGoogleEvent(),
+                              ),
+                        ),
+                        SizedBox(width: Constants.size10),
+                      ],
                     ),
                     SizedBox(height: Constants.size30),
                     Row(
@@ -85,24 +119,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           Constants.noAccount,
-                          style: AppStyle.title,
+                          style: AppStyle.lightTitle,
                         ),
                         GestureDetector(
                           onTap: () =>
-                              getIt.get<LoginBloc>().add(ClickSignUpEvent()),
+                              getIt.get<LoginBloc>().add(SignUpEvent()),
                           child: Text(
                             Constants.signUp,
-                            style: AppStyle.title
-                                .copyWith(color: AppColor.hE2703A),
+                            style: AppStyle.title,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: Constants.size30),
-                    const CustomButton(
-                      text: Constants.signInWithGoogle,
-                      bgColor: AppColor.hDDDDDD,
-                    )
                   ],
                 ),
               ),
@@ -116,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //test01@gmail.com - 123456789
   void tryLogin() {
     if (_formKey.currentState!.validate()) {
-      getIt.get<LoginBloc>().add(SubmitLoginWithFirebaseEvent());
+      getIt.get<LoginBloc>().add(LoginWithFirebaseEvent());
     } else {
       showSnackBar(Constants.loginFail);
       passwordController.clear();
@@ -141,9 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           Constants.forgetPassword,
           style: AppStyle.title.copyWith(
-              fontSize: 16,
-              decoration: TextDecoration.underline,
-              color: AppColor.borderOTPColor),
+            fontSize: 16,
+            decoration: TextDecoration.underline,
+            color: AppColor.borderOTPColor,
+          ),
         ),
       ),
     );

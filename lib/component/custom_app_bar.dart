@@ -1,3 +1,4 @@
+import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
@@ -25,7 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: IconButton(
         onPressed: () => NavigationService.navigatorKey.currentState?.pop(),
-        icon: Image.asset(leadingIconPath ?? ""),
+        icon: Image.asset(leadingIconPath ?? AppResource.leftArrow),
       ),
     );
   }

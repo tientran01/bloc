@@ -11,4 +11,6 @@ class AppRouteName {
   static const String phoneOtp = "/phone_otp";
   static const String inputEmailReset = "/input_email_reset";
   static const String createNewPassword = "/create_new_password";
+  static const String googleShowInformation = "/google_show";
+  static const String facebookShowInformation = "/facebook_show";
 }

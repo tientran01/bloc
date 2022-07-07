@@ -13,7 +13,9 @@ class AppStyle {
     fontSize: 18.0,
     color: Colors.black,
   );
-
+  static TextStyle lightTitle = title.copyWith(
+    color: AppColor.borderOTPColor,
+  );
   final defaultPinTheme = PinTheme(
     width: 56,
     height: 56,

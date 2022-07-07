@@ -1,5 +1,7 @@
+import 'package:bloc_demo/pages/auth/facebook_auth/facebook_show_screen.dart';
 import 'package:bloc_demo/pages/auth/forget_password/input_email_reset_screen.dart';
 import 'package:bloc_demo/pages/auth/forget_password/create_new_password_screen.dart';
+import 'package:bloc_demo/pages/auth/google_auth/google_show_screen.dart';
 import 'package:bloc_demo/pages/auth/phone_auth/phone_input_screen.dart';
 import 'package:bloc_demo/pages/auth/phone_auth/phone_otp_screen.dart';
 import 'package:bloc_demo/pages/auth/sign_up_screen.dart';
@@ -9,7 +11,7 @@ import 'package:bloc_demo/pages/home_screen.dart';
 import 'package:bloc_demo/pages/auth/show_information_screen.dart';
 import 'package:bloc_demo/pages/auth/login_screen.dart';
 import 'package:bloc_demo/pages/profile_screen.dart';
-import 'package:bloc_demo/pages/auth/splash_screen.dart';
+import 'package:bloc_demo/pages/auth/splash/splash_screen.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,8 @@ class RouteName {
     AppRouteName.phoneInput: (BuildContext context) => const PhoneInputScreen(),
     AppRouteName.phoneOtp: (BuildContext context) => const PhoneOTPScreen(),
     AppRouteName.inputEmailReset: (BuildContext context) => const InputEmailResetScreen(),
-    AppRouteName.createNewPassword: (BuildContext context) => const CreateNewPasswordScreen()
+    AppRouteName.createNewPassword: (BuildContext context) => const CreateNewPasswordScreen(),
+    AppRouteName.googleShowInformation: (BuildContext context) => const GoogleShowScreen(),
+    AppRouteName.facebookShowInformation: (BuildContext context) => const FacebookShowScreen()
   };
 }

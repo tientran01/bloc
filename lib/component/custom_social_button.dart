@@ -32,7 +32,7 @@ class CustomSocialButton extends StatelessWidget {
             socialIconPath,
             width: width ?? 30.0,
             height: height ?? 30.0,
-            color: iconColor ?? AppColor.hE2703A,
+            color: iconColor ?? AppColor.h413F42,
           )),
     );
   }

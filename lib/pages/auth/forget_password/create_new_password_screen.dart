@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/foget_password/bloc/forget_password_state.dart';
 import '../../../component/custom_button.dart';
 import '../../../component/custom_text_field.dart';
-import '../../../resource/app_color.dart';
 import '../../../resource/app_resource.dart';
 import '../../../resource/app_style.dart';
 import '../../../resource/constants.dart';
@@ -53,7 +52,6 @@ class CreateNewPasswordScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 const CustomButton(
                   text: Constants.resetPassword,
-                  bgColor: AppColor.hFF9F29,
                 )
               ],
             ),

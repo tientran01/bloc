@@ -17,9 +17,7 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingIconPath: AppResource.leftArrow,
-      ),
+      appBar: const CustomAppBar(),
       body: BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
         builder: (_, state) {
           return Container(
@@ -28,7 +26,7 @@ class PhoneInputScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  Constants.signUpWithPhoneNumber.toUpperCase(),
+                  Constants.signInWithPhoneNumber.toUpperCase(),
                   style: AppStyle.header.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

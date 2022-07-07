@@ -12,8 +12,6 @@ import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../resource/app_resource.dart';
-
 class PhoneOTPScreen extends StatefulWidget {
   const PhoneOTPScreen({Key? key}) : super(key: key);
 
@@ -61,8 +59,7 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
   Widget build(BuildContext context) {
     String phoneNumber = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingIconPath: AppResource.leftArrow,
+      appBar: const CustomAppBar(
         title: Constants.verifyPhone,
       ),
       body: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
@@ -98,24 +95,26 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                   children: [
                     Text(
                       Constants.sendOTPfail,
-                      style: AppStyle.title,
+                      style: AppStyle.lightTitle,
                     ),
                     IgnorePointer(
                       ignoring: ignoring,
                       child: GestureDetector(
                         onTap: () {
                           pinController.clear();
-                          getIt.get<VerifyOtpBloc>().add(ResendOtpCodeEvent(
-                                phoneNumber: phoneNumber,
-                              ));
+                          getIt.get<VerifyOtpBloc>().add(
+                                ResendOtpCodeEvent(
+                                  phoneNumber: phoneNumber,
+                                ),
+                              );
                           startTimer();
                         },
                         child: Text(
                           Constants.requestAgain,
                           style: AppStyle.title.copyWith(
-                            color: !ignoring
-                                ? AppColor.hFF9F29
-                                : AppColor.borderOTPColor,
+                            color: ignoring
+                                ? AppColor.hDDDDDD.withOpacity(0.6)
+                                : AppColor.h413F42,
                           ),
                         ),
                       ),
@@ -132,13 +131,25 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                 ),
                 SizedBox(height: Constants.size30),
                 RichText(
-                    text: TextSpan(children: [
-                  TextSpan(text: Constants.resendOtpCode, style: AppStyle.title),
-                  TextSpan(
-                      text: time,
-                      style: AppStyle.title.copyWith(color: Colors.red)),
-                  TextSpan(text: Constants.sec, style: AppStyle.title)
-                ]))
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: Constants.resendOtpCode,
+                        style: AppStyle.title,
+                      ),
+                      TextSpan(
+                        text: time,
+                        style: AppStyle.title.copyWith(
+                          color: AppColor.hEB4747,
+                        ),
+                      ),
+                      TextSpan(
+                        text: Constants.sec,
+                        style: AppStyle.title,
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           );

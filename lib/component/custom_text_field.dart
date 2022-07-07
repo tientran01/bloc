@@ -69,7 +69,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               child: suffixIconPassword(),
             ),
         border: outlineInputBorder(color: Colors.transparent),
-        focusedBorder: outlineInputBorder(color: AppColor.hFF9F29),
+        focusedBorder: outlineInputBorder(color: AppColor.h413F42),
       ),
       onChanged: widget.onChanged,
       inputFormatters: widget.inputFormatters,

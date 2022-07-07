@@ -51,8 +51,8 @@ dependencies:
   google_sign_in: ^5.3.3
   shared_preferences: ^2.0.15
   flutter_easyloading: ^3.0.5
+  flutter_facebook_auth: ^4.3.4+2
 
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -4,7 +4,6 @@ import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
-import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
@@ -55,7 +54,6 @@ class InputEmailResetScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 CustomButton(
                   text: Constants.send,
-                  bgColor: AppColor.hFF9F29,
                   onTap: () => getIt.get<ForgetPasswordBloc>().add(SendEmailEvent()),
                 )
               ],

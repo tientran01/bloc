@@ -38,7 +38,6 @@ class Constants {
   static const String loginSuccess = "Login Success";
   static const String signInWithGoogle = "Sign in with google";
   static const String signInWithPhoneNumber = "Sign In With Phone Number";
-  static const String signUpWithPhoneNumber = "Sign Up With Phone Number";
   static const String resetPassword = "Reset Password";
   static const String createNewPassword = "Create New Password";
   static const String resendOtpCode = "Send OTP again in";
@@ -46,4 +45,6 @@ class Constants {
   static const String success = "Success";
   static const String loading = "Loading";
   static const String error = "Error";
+  static const String profile = "Profile";
+  static const String splashScreen = "Splash Screen";
 }

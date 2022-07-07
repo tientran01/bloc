@@ -1,10 +1,6 @@
 import 'package:bloc_demo/component/custom_button.dart';
-import 'package:bloc_demo/component/custom_divider.dart';
-import 'package:bloc_demo/component/custom_social_button.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
 import 'package:bloc_demo/main.dart';
-import 'package:bloc_demo/resource/app_color.dart';
-import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
@@ -62,7 +58,6 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: Constants.size30),
                   CustomButton(
                     text: Constants.signUp,
-                    bgColor: AppColor.hE2703A,
                     onTap: () {
                       trySignUp();
                     },
@@ -73,53 +68,18 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       Text(
                         Constants.haveAccount,
-                        style: AppStyle.title.copyWith(color: AppColor.h413F42),
+                        style: AppStyle.lightTitle,
                       ),
                       GestureDetector(
                         onTap: () => NavigationService.navigatorKey.currentState
                             ?.pushNamed("/login"),
                         child: Text(
                           Constants.login,
-                          style:
-                              AppStyle.title.copyWith(color: AppColor.hFF9F29),
+                          style: AppStyle.title,
                         ),
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: Constants.size30,
-                  ),
-                  const CustomDivider(
-                    textDisplay: Constants.or,
-                    isOr: true,
-                  ),
-                  SizedBox(height: Constants.size30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomSocialButton(
-                        socialIconPath: AppResource.phoneIcon,
-                        onTap: () => getIt
-                            .get<SignUpBloc>()
-                            .add(SignUpWithPhoneNumberEvent()),
-                      ),
-                      SizedBox(width: Constants.size10),
-                      CustomSocialButton(
-                        socialIconPath: AppResource.facebookIcon,
-                        onTap: () {},
-                      ),
-                      SizedBox(width: Constants.size10),
-                      CustomSocialButton(
-                        socialIconPath: AppResource.googleIcon,
-                        onTap: () {},
-                      ),
-                      SizedBox(width: Constants.size10),
-                      CustomSocialButton(
-                        socialIconPath: AppResource.twitterIcon,
-                        onTap: () {},
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),

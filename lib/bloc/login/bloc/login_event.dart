@@ -18,6 +18,14 @@ class GetEmailAndPasswordFormTextFieldEvent extends LoginEvent {
   List<Object?> get props => [email, password];
 }
 
-class SubmitLoginWithFirebaseEvent extends LoginEvent {}
+class LoginWithFirebaseEvent extends LoginEvent {}
 
-class ClickSignUpEvent extends LoginEvent {}
+class SignUpEvent extends LoginEvent {}
+
+class SignInWithPhoneNumberEvent extends LoginEvent {}
+
+class SignInWithGoogleEvent extends LoginEvent {}
+
+class SignInWithFacebookEvent extends LoginEvent {}
+
+class SignOutEvent extends LoginEvent {}
