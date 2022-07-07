@@ -4,7 +4,6 @@ import 'package:bloc_demo/helper/firebase_helper.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../resource/app_route_name.dart';
 
 class ForgetPasswordBloc
@@ -22,11 +21,8 @@ class ForgetPasswordBloc
   }
 
   Future<void> _onSendEmail(SendEmailEvent event, Emitter<void> emitter) async {
-    await FirebaseHelper.shared.resetPasswordWithEmail(email: state.email).then(
-          (value) => NavigationService.navigatorKey.currentState?.pushNamed(
-              AppRouteName.login
-              ),
-        );
+    await FirebaseHelper.shared.resetPasswordWithEmail(email: state.email);
+    NavigationService.navigatorKey.currentState?.pushNamed(AppRouteName.checkEmail);
   }
 
   static ForgetPasswordBloc of(BuildContext context) =>

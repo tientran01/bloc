@@ -43,4 +43,6 @@ class AppStrings {
   static const String error = "Error";
   static const String profile = "Profile";
   static const String splashScreen = "Splash Screen";
+  static const String checkValidEmail = "Verify Your Email";
+  static const String messCheckEmail = "Please check your email";
 }

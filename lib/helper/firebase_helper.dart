@@ -78,17 +78,20 @@ class FirebaseHelper {
       smsCode: smsCode ?? '',
     );
     try {
+      Loading.show(AppStrings.loading);
       var result =
           await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       print(result.user);
       if (result.user != null) {
+        Loading.dismiss();
         NavigationService.navigatorKey.currentState
-            ?.pushNamed("/show_information");
+            ?.pushNamed(AppRouteName.showInformation);
       }
     } on FirebaseAuthException catch (e) {
+      Loading.showError(AppStrings.error);
       print(e.code);
     } catch (e) {
-      print('error${e.toString()}');
+      print('${AppStrings.error} ${e.toString()}');
     }
   }
 

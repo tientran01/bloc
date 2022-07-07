@@ -13,4 +13,5 @@ class AppRouteName {
   static const String createNewPassword = "/create_new_password";
   static const String googleShowInformation = "/google_show";
   static const String facebookShowInformation = "/facebook_show";
+  static const String checkEmail = "/check_email";
 }

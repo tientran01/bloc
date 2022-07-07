@@ -1,5 +1,6 @@
 import 'package:bloc_demo/bloc/information/bloc/information_bloc.dart';
 import 'package:bloc_demo/bloc/information/bloc/information_event.dart';
+import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_strings.dart';
@@ -15,8 +16,8 @@ class ShowInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppStrings.profile),
+      appBar: const CustomAppBar(
+        title: AppStrings.profile,
       ),
       body: BlocBuilder<InformationBloc, InformationState>(
         builder: (_, state) {

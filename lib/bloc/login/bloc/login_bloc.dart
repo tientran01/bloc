@@ -41,7 +41,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: state.password,
       );
       if (user != null) {
-        Loading.show(AppStrings.success);
+        Loading.dismiss();
         NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.showInformation);
         return Future.value(user);

@@ -1,4 +1,5 @@
 import 'package:bloc_demo/pages/auth/facebook_auth/facebook_show_screen.dart';
+import 'package:bloc_demo/pages/auth/forget_password/check_email_screen.dart';
 import 'package:bloc_demo/pages/auth/forget_password/input_email_reset_screen.dart';
 import 'package:bloc_demo/pages/auth/forget_password/create_new_password_screen.dart';
 import 'package:bloc_demo/pages/auth/google_auth/google_show_screen.dart';
@@ -31,6 +32,7 @@ class RouteName {
     AppRouteName.inputEmailReset: (BuildContext context) => const InputEmailResetScreen(),
     AppRouteName.createNewPassword: (BuildContext context) => const CreateNewPasswordScreen(),
     AppRouteName.googleShowInformation: (BuildContext context) => const GoogleShowScreen(),
-    AppRouteName.facebookShowInformation: (BuildContext context) => const FacebookShowScreen()
+    AppRouteName.facebookShowInformation: (BuildContext context) => const FacebookShowScreen(),
+    AppRouteName.checkEmail: (BuildContext context) => const CheckEmailScreen()
   };
 }
