@@ -2,6 +2,7 @@ import 'package:bloc_demo/bloc/login/bloc/login_event.dart';
 import 'package:bloc_demo/bloc/login/bloc/login_state.dart';
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
+import 'package:bloc_demo/helper/shared_preferences_helper.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,8 +43,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       if (user != null) {
         Loading.dismiss();
-        NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.showInformation);
+        NavigationService.navigatorKey.currentState?.pushNamed(
+          AppRouteName.home,
+          arguments: user,
+        );
+        SharedPreferencesHelper.shared.login(user.uid);
         return Future.value(user);
       }
       return Future.error(Error.loginWithFirebaseError);

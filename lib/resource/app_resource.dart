@@ -11,4 +11,5 @@ class AppResource {
   static String sendIcon = '${baseIconPath}ic_send.png';
   static String leftArrow = '${baseIconPath}ic_left_arrow.png';
   static String rightArrow = '${baseIconPath}ic_right_arrow.png';
+  static String search = '${baseIconPath}ic_search.png';
 }

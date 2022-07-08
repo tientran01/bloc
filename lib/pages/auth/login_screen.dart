@@ -10,7 +10,6 @@ import 'package:bloc_demo/resource/constants.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../component/custom_divider.dart';
 import '../../component/custom_social_button.dart';
 import '../../resource/app_resource.dart';

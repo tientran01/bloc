@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 abstract class InformationEvent extends Equatable {
   const InformationEvent();
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
-class ClickButtonSignOutEvent extends InformationEvent {}
+class SignOutEvent extends InformationEvent {}

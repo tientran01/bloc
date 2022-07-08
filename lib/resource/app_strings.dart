@@ -45,4 +45,9 @@ class AppStrings {
   static const String splashScreen = "Splash Screen";
   static const String checkValidEmail = "Verify Your Email";
   static const String messCheckEmail = "Please check your email";
+  static const String blocDemo = "Bloc Demo";
+  static const String getDataById = "Get Data By ID";
+  static const String getDataByUserId = "Get Data By UserId";
+  static const String demoCubit = "Demo Cubit";
+  static const String demoGetX = "Demo getx";
 }

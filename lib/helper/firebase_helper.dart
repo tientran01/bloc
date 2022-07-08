@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
+import 'package:bloc_demo/helper/shared_preferences_helper.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,7 +82,6 @@ class FirebaseHelper {
       Loading.show(AppStrings.loading);
       var result =
           await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
-      print(result.user);
       if (result.user != null) {
         Loading.dismiss();
         NavigationService.navigatorKey.currentState
@@ -96,7 +96,6 @@ class FirebaseHelper {
   }
 
   Future<void> signOut() async {
-    _googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
   }
 
@@ -120,8 +119,11 @@ class FirebaseHelper {
         final UserCredential userCredential =
             await auth.signInWithCredential(authCredential);
         user = userCredential.user;
-        NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.googleShowInformation, arguments: user);
+        NavigationService.navigatorKey.currentState?.pushNamed(
+          AppRouteName.showUser,
+          arguments: user,
+        );
+        SharedPreferencesHelper.shared.login(user?.uid ?? "");
       } on FirebaseException catch (e) {
         Loading.showError(AppStrings.error);
         if (e.code == Error.accountExist) {
@@ -149,9 +151,10 @@ class FirebaseHelper {
       if (user != null) {
         print(user);
         NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.facebookShowInformation,
+          AppRouteName.showUser,
           arguments: user,
         );
+        SharedPreferencesHelper.shared.login(user.uid);
       } else {
         print(AppStrings.error);
       }

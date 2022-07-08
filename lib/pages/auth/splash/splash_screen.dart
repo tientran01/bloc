@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     splashBloc = SplashBloc.of(context);
     super.initState();
-    splashBloc.add(AutoNavigationToLoginEvent());
+    splashBloc.add(const LoginEvent());
   }
 
   @override

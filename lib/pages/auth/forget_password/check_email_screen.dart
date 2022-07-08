@@ -1,7 +1,5 @@
-import 'package:bloc_demo/bloc/foget_password/bloc/forget_password_bloc.dart';
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
-import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:bloc_demo/resource/app_style.dart';

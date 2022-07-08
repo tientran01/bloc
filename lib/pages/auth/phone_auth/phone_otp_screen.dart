@@ -5,12 +5,11 @@ import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_state.dart';
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_otp_field.dart';
-import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../main.dart';
 import '../../../resource/app_strings.dart';
 import '../../../resource/constants.dart';
 

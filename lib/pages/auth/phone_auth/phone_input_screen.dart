@@ -1,6 +1,5 @@
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
-import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_strings.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_bloc.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_event.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_state.dart';
+import '../../../main.dart';
 
 class PhoneInputScreen extends StatelessWidget {
   const PhoneInputScreen({Key? key}) : super(key: key);

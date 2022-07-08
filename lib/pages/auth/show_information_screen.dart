@@ -7,7 +7,6 @@ import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../bloc/information/bloc/information_state.dart';
 
 class ShowInformationScreen extends StatelessWidget {
@@ -29,7 +28,7 @@ class ShowInformationScreen extends StatelessWidget {
                 CustomButton(
                   text: AppStrings.signOut,
                   onTap: () => getIt.get<InformationBloc>().add(
-                        ClickButtonSignOutEvent(),
+                        SignOutEvent(),
                       ),
                 )
               ],
