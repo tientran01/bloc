@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
             color: Colors.transparent,
           ),
           borderRadius: BorderRadius.circular(20.0),
-          color: bgColor ?? AppColor.borderOTPColor,
+          color: bgColor ?? AppColor.h413F42,
         ),
         alignment: Alignment.center,
         width: width ?? size.width,

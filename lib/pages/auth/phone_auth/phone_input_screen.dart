@@ -1,8 +1,8 @@
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_text_field.dart';
-import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
+import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_bloc.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_event.dart';
 import '../../../bloc/phone_auth/bloc/phone_auth_state.dart';
+import '../../../main.dart';
 
 class PhoneInputScreen extends StatelessWidget {
   const PhoneInputScreen({Key? key}) : super(key: key);
@@ -17,9 +18,7 @@ class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingIconPath: AppResource.leftArrow,
-      ),
+      appBar: const CustomAppBar(),
       body: BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
         builder: (_, state) {
           return Container(
@@ -28,7 +27,7 @@ class PhoneInputScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  Constants.signUpWithPhoneNumber.toUpperCase(),
+                  AppStrings.signInWithPhoneNumber.toUpperCase(),
                   style: AppStyle.header.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -37,7 +36,7 @@ class PhoneInputScreen extends StatelessWidget {
                 SizedBox(height: Constants.size30),
                 CustomTextField(
                   type: TextFieldType.phoneNumber,
-                  hintText: Constants.phoneInput,
+                  hintText: AppStrings.phoneInput,
                   onChanged: (String phoneNumber) =>
                       getIt.get<PhoneAuthBloc>().add(
                             GetPhoneFromFieldAndValidateEvent(

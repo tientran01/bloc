@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../model/data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -7,20 +7,11 @@ abstract class HomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class GetDataByIdEvent extends HomeEvent {
-  final Data? data;
-  const GetDataByIdEvent({this.data});
+class ShowProfileEvent extends HomeEvent {
+  final User? user;
+  const ShowProfileEvent({this.user});
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [user];
 }
 
-class GetDataByUserIdEvent extends HomeEvent {
-  final Data? data;
-  const GetDataByUserIdEvent({this.data});
-  @override
-  List<Object?> get props => [data];
-}
-
-class ClickButtonDemoCubitEvent extends HomeEvent {}
-
-class ClickButtonDemoGetXEvent extends HomeEvent {}
+class SignOutEvent extends HomeEvent {}

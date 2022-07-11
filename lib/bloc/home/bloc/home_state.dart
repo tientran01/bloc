@@ -1,16 +1,18 @@
 import 'package:equatable/equatable.dart';
-import '../../../model/data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeState extends Equatable {
-  final List<Data>? datas;
-  const HomeState({this.datas});
+  final User? user;
+  const HomeState({this.user});
   const HomeState.initState() : this();
-  HomeState copyWith({List<Data>? datas}) {
+  HomeState copyWith({
+    User? user,
+  }) {
     return HomeState(
-      datas: datas ?? this.datas
+      user: user,
     );
   }
 
   @override
-  List<Object?> get props => [datas];
+  List<Object?> get props => [user];
 }

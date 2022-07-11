@@ -13,7 +13,28 @@ class AppStyle {
     fontSize: 18.0,
     color: Colors.black,
   );
-
+  static TextStyle lightTitle = title.copyWith(
+    color: AppColor.borderOTPColor,
+  );
+  static TextStyle carouselTitle = const TextStyle(
+    fontSize: 22,
+    color: AppColor.hFFFFFF,
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle price = GoogleFonts.lato(
+    textStyle: const TextStyle(
+      fontSize: 18.0,
+      fontWeight: FontWeight.w900,
+      color: AppColor.h413F42,
+    ),
+  );
+  static TextStyle nameSection = GoogleFonts.lato(
+    textStyle: const TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.w800,
+      color: AppColor.h413F42,
+    ),
+  );
   final defaultPinTheme = PinTheme(
     width: 56,
     height: 56,

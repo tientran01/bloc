@@ -5,14 +5,13 @@ import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_state.dart';
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/component/custom_otp_field.dart';
-import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_style.dart';
-import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../resource/app_resource.dart';
+import '../../../main.dart';
+import '../../../resource/app_strings.dart';
+import '../../../resource/constants.dart';
 
 class PhoneOTPScreen extends StatefulWidget {
   const PhoneOTPScreen({Key? key}) : super(key: key);
@@ -61,9 +60,8 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
   Widget build(BuildContext context) {
     String phoneNumber = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingIconPath: AppResource.leftArrow,
-        title: Constants.verifyPhone,
+      appBar: const CustomAppBar(
+        title: AppStrings.verifyPhone,
       ),
       body: BlocBuilder<VerifyOtpBloc, VerifyOtpState>(
         builder: (_, state) {
@@ -75,7 +73,7 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${Constants.phoneGetOtp} $phoneNumber",
+                  "${AppStrings.phoneGetOtp} $phoneNumber",
                   style: AppStyle.title,
                 ),
                 SizedBox(height: Constants.size30),
@@ -97,25 +95,27 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      Constants.sendOTPfail,
-                      style: AppStyle.title,
+                      AppStrings.sendOTPfail,
+                      style: AppStyle.lightTitle,
                     ),
                     IgnorePointer(
                       ignoring: ignoring,
                       child: GestureDetector(
                         onTap: () {
                           pinController.clear();
-                          getIt.get<VerifyOtpBloc>().add(ResendOtpCodeEvent(
-                                phoneNumber: phoneNumber,
-                              ));
+                          getIt.get<VerifyOtpBloc>().add(
+                                ResendOtpCodeEvent(
+                                  phoneNumber: phoneNumber,
+                                ),
+                              );
                           startTimer();
                         },
                         child: Text(
-                          Constants.requestAgain,
+                          AppStrings.requestAgain,
                           style: AppStyle.title.copyWith(
-                            color: !ignoring
-                                ? AppColor.hFF9F29
-                                : AppColor.borderOTPColor,
+                            color: ignoring
+                                ? AppColor.hDDDDDD.withOpacity(0.6)
+                                : AppColor.h413F42,
                           ),
                         ),
                       ),
@@ -124,7 +124,7 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                 ),
                 SizedBox(height: Constants.size30),
                 CustomButton(
-                  text: Constants.signUp,
+                  text: AppStrings.signUp,
                   bgColor: AppColor.h413F42,
                   onTap: () => getIt
                       .get<VerifyOtpBloc>()
@@ -132,13 +132,25 @@ class _PhoneOTPScreenState extends State<PhoneOTPScreen> {
                 ),
                 SizedBox(height: Constants.size30),
                 RichText(
-                    text: TextSpan(children: [
-                  TextSpan(text: Constants.resendOtpCode, style: AppStyle.title),
-                  TextSpan(
-                      text: time,
-                      style: AppStyle.title.copyWith(color: Colors.red)),
-                  TextSpan(text: Constants.sec, style: AppStyle.title)
-                ]))
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: AppStrings.resendOtpCode,
+                        style: AppStyle.title,
+                      ),
+                      TextSpan(
+                        text: time,
+                        style: AppStyle.title.copyWith(
+                          color: AppColor.hEB4747,
+                        ),
+                      ),
+                      TextSpan(
+                        text: AppStrings.sec,
+                        style: AppStyle.title,
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           );
