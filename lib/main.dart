@@ -18,7 +18,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'bloc/login/bloc/login_bloc.dart';
 
-  final GetIt getIt = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => DemoCubit()),
         BlocProvider(create: (_) => PhoneAuthBloc()),
         BlocProvider(create: (_) => VerifyOtpBloc()),
-        BlocProvider(create: (_) => ForgetPasswordBloc())
+        BlocProvider(create: (_) => ForgetPasswordBloc()),
+
       ],
       child: const MyApp(),
     ),

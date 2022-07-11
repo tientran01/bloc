@@ -50,4 +50,13 @@ class AppStrings {
   static const String getDataByUserId = "Get Data By UserId";
   static const String demoCubit = "Demo Cubit";
   static const String demoGetX = "Demo getx";
+  static const String searchInput = "What would you like to eat?";
+  static const String carouselTitle_1 = "Black Friday";
+  static const String popularFood = "Popular Food";
+  static const String pizza = "Maxican Pizza pizza";
+  static const String home = "Home";
+  static const String chat = "Chat";
+  static const String shopping = "Shopping";
+  static const String category = "Category";
+  static const String detailProduct = "Detail product";
 }

@@ -25,7 +25,7 @@ class SharedPreferencesHelper {
     if (uid != null) {
       Future.delayed(const Duration(seconds: 2)).then(
         (value) => NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.home),
+            ?.pushNamed(AppRouteName.main),
       );
     } else {
       Future.delayed(const Duration(seconds: 2)).then(
