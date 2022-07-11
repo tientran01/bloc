@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 abstract class SignUpEvent extends Equatable {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class GetEmailAndPasswordFormTextFieldEvent extends SignUpEvent {

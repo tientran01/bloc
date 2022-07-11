@@ -1,11 +1,11 @@
 import 'package:bloc_demo/bloc/demo/bloc/demo_bloc.dart';
+import 'package:bloc_demo/bloc/demo/bloc/demo_event.dart';
 import 'package:bloc_demo/bloc/demo/bloc/demo_state.dart';
 import 'package:bloc_demo/component/custom_app_bar.dart';
 import 'package:bloc_demo/component/custom_button.dart';
 import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/demo/bloc/demo_event.dart';
 
 class DemoBlocScreen extends StatefulWidget {
   const DemoBlocScreen({Key? key}) : super(key: key);
