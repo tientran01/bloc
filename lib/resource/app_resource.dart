@@ -26,4 +26,5 @@ class AppResource {
   static String home = '${baseIconPath}ic_home.png';
   static String shoppingBag = '${baseIconPath}ic_shopping_bag.png';
   static String chat = '${baseIconPath}ic_chat.png';
+  static String notification = '${baseIconPath}ic_notification.png';
 }

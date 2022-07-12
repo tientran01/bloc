@@ -38,100 +38,104 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (_, state) {
           return Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      AppStrings.login,
-                      style: TextStyle(fontSize: 25.0, color: Colors.black),
-                    ),
-                    SizedBox(height: Constants.size30),
-                    CustomTextField(
-                      textEditingController: emailController,
-                      type: TextFieldType.email,
-                      title: AppStrings.email,
-                      hintText: AppStrings.emailInput,
-                      suffixIcon: const Icon(Icons.email),
-                      onChanged: (email) => getIt.get<LoginBloc>().add(
-                            GetEmailAndPasswordFormTextFieldEvent(email: email),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: Constants.size30),
+                      const Text(
+                        AppStrings.login,
+                        style: TextStyle(fontSize: 25.0, color: Colors.black),
+                      ),
+                      SizedBox(height: Constants.size30),
+                      CustomTextField(
+                        textEditingController: emailController,
+                        type: TextFieldType.email,
+                        title: AppStrings.email,
+                        hintText: AppStrings.emailInput,
+                        suffixIcon: const Icon(Icons.email),
+                        onChanged: (email) => getIt.get<LoginBloc>().add(
+                              GetEmailAndPasswordFormTextFieldEvent(
+                                  email: email),
+                            ),
+                      ),
+                      SizedBox(height: Constants.size10),
+                      CustomTextField(
+                        textEditingController: passwordController,
+                        title: AppStrings.password,
+                        type: TextFieldType.password,
+                        hintText: AppStrings.passwordInput,
+                        onChanged: (String password) =>
+                            getIt.get<LoginBloc>().add(
+                                  GetEmailAndPasswordFormTextFieldEvent(
+                                      password: password),
+                                ),
+                      ),
+                      buildForgetPassword(),
+                      SizedBox(height: Constants.size30),
+                      CustomButton(
+                        text: AppStrings.login,
+                        onTap: () {
+                          tryLogin();
+                        },
+                      ),
+                      SizedBox(height: Constants.size30),
+                      const CustomDivider(
+                        textDisplay: AppStrings.or,
+                        isOr: true,
+                      ),
+                      SizedBox(height: Constants.size30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomSocialButton(
+                            socialIconPath: AppResource.phoneIcon,
+                            onTap: () => getIt
+                                .get<LoginBloc>()
+                                .add(SignInWithPhoneNumberEvent()),
                           ),
-                    ),
-                    SizedBox(height: Constants.size10),
-                    CustomTextField(
-                      textEditingController: passwordController,
-                      title: AppStrings.password,
-                      type: TextFieldType.password,
-                      hintText: AppStrings.passwordInput,
-                      onChanged: (String password) =>
-                          getIt.get<LoginBloc>().add(
-                                GetEmailAndPasswordFormTextFieldEvent(
-                                    password: password),
-                              ),
-                    ),
-                    buildForgetPassword(),
-                    SizedBox(height: Constants.size30),
-                    CustomButton(
-                      text: AppStrings.login,
-                      onTap: () {
-                        tryLogin();
-                      },
-                    ),
-                    SizedBox(height: Constants.size30),
-                    const CustomDivider(
-                      textDisplay: AppStrings.or,
-                      isOr: true,
-                    ),
-                    SizedBox(height: Constants.size30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomSocialButton(
-                          socialIconPath: AppResource.phoneIcon,
-                          onTap: () => getIt
-                              .get<LoginBloc>()
-                              .add(SignInWithPhoneNumberEvent()),
-                        ),
-                        SizedBox(width: Constants.size10),
-                        CustomSocialButton(
-                          socialIconPath: AppResource.facebookIcon,
-                          onTap: () => getIt.get<LoginBloc>().add(
-                                SignInWithFacebookEvent(),
-                              ),
-                        ),
-                        SizedBox(width: Constants.size10),
-                        CustomSocialButton(
-                          socialIconPath: AppResource.googleIcon,
-                          onTap: () => getIt.get<LoginBloc>().add(
-                                SignInWithGoogleEvent(),
-                              ),
-                        ),
-                        SizedBox(width: Constants.size10),
-                      ],
-                    ),
-                    SizedBox(height: Constants.size30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppStrings.noAccount,
-                          style: AppStyle.lightTitle,
-                        ),
-                        GestureDetector(
-                          onTap: () =>
-                              getIt.get<LoginBloc>().add(SignUpEvent()),
-                          child: Text(
-                            AppStrings.signUp,
-                            style: AppStyle.title,
+                          SizedBox(width: Constants.size10),
+                          CustomSocialButton(
+                            socialIconPath: AppResource.facebookIcon,
+                            onTap: () => getIt.get<LoginBloc>().add(
+                                  SignInWithFacebookEvent(),
+                                ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          SizedBox(width: Constants.size10),
+                          CustomSocialButton(
+                            socialIconPath: AppResource.googleIcon,
+                            onTap: () => getIt.get<LoginBloc>().add(
+                                  SignInWithGoogleEvent(),
+                                ),
+                          ),
+                          SizedBox(width: Constants.size10),
+                        ],
+                      ),
+                      SizedBox(height: Constants.size30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.noAccount,
+                            style: AppStyle.lightTitle,
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                getIt.get<LoginBloc>().add(SignUpEvent()),
+                            child: Text(
+                              AppStrings.signUp,
+                              style: AppStyle.title,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

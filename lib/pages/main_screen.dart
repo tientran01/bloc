@@ -1,6 +1,6 @@
-import 'package:bloc_demo/pages/auth/sign_up_screen.dart';
 import 'package:bloc_demo/pages/chat/chat_screen.dart';
 import 'package:bloc_demo/pages/home/home_screen.dart';
+import 'package:bloc_demo/pages/notification/notification_screen.dart';
 import 'package:bloc_demo/pages/shopping/shopping_screen.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const ChatScreen(),
     const ShoppingScreen(),
-    SignUpScreen()
+    const NotificationScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             index: 2,
           ),
           bottomNavigationBarItem(
-            iconPath: AppResource.profile,
+            iconPath: AppResource.notification,
             index: 3,
           ),
         ],
@@ -69,8 +69,10 @@ class _MainScreenState extends State<MainScreen> {
       );
 
   void _onTapItem(int index) {
-    setState(() {
-      selectIndex = index;
-    });
+    setState(
+      () {
+        selectIndex = index;
+      },
+    );
   }
 }

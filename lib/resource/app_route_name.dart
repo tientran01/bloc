@@ -18,4 +18,5 @@ class AppRouteName {
   static const String chat = "/chat";
   static const String shopping = "/shopping";
   static const String detaiProduct = "detail_product";
+  static const String notification = "/notification";
 }

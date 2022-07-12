@@ -5,9 +5,9 @@ import 'package:bloc_demo/helper/shared_preferences_helper.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../resource/app_strings.dart';
 
 class FirebaseHelper {
@@ -18,11 +18,13 @@ class FirebaseHelper {
   late PhoneAuthCredential phoneAuthCredential;
   late AuthCredential authCredential;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-  Future<User?> loginWithEmailAndPassword(
-      {String? email, String? password}) async {
+  Future<User?> loginWithEmailAndPassword({
+    String? email,
+    String? password,
+  }) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -33,8 +35,10 @@ class FirebaseHelper {
     return user;
   }
 
-  Future<User?> signUpWithEmailAndPassword(
-      {String? email, String? password}) async {
+  Future<User?> signUpWithEmailAndPassword({
+    String? email,
+    String? password,
+  }) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -158,6 +162,23 @@ class FirebaseHelper {
       } else {
         print(AppStrings.error);
       }
+    }
+  }
+
+  Future<void> registerNotification() async {
+    NotificationSettings settings = await firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print(AppStrings.grantedPermission);
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print(AppStrings.grantedProvisionalPermission);
+    } else {
+      print(AppStrings.notAcceptedPermission);
     }
   }
 }
