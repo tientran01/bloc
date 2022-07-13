@@ -44,7 +44,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (user != null) {
         Loading.dismiss();
         NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.home,
+          AppRouteName.main,
           arguments: user,
         );
         SharedPreferencesHelper.shared.login(user.uid);

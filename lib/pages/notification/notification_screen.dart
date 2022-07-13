@@ -54,10 +54,6 @@ class NotificationScreen extends StatelessWidget {
               },
             ),
             SizedBox(height: Constants.size20),
-            CustomButton(
-              text: AppStrings.showPushNotification,
-              onTap: () {},
-            ),
           ],
         ),
       ),

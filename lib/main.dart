@@ -8,13 +8,13 @@ import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
 import 'package:bloc_demo/bloc/verify_otp_bloc/bloc/verify_otp_bloc.dart';
 import 'package:bloc_demo/cubit/demo/demo_cubit.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
-import 'package:bloc_demo/helper/notification_service.dart';
 import 'package:bloc_demo/modules/bloc_module.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:bloc_demo/router/router_name.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -25,18 +25,14 @@ final GetIt getIt = GetIt.instance;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // NotificationService.shared.init();
   BlocModule.provider();
   FirebaseHelper.shared.registerNotification();
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('Message data: ${message.data}');
-
-    if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
-    }
-  });
+  FirebaseHelper.shared.getToken();
+  FirebaseHelper.shared.setupInteractedMessage();
   runApp(
     MultiBlocProvider(
       providers: [

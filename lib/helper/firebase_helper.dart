@@ -172,6 +172,12 @@ class FirebaseHelper {
       provisional: false,
       sound: true,
     );
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true, 
+      badge: true,
+      sound: true,
+    );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print(AppStrings.grantedPermission);
     } else if (settings.authorizationStatus ==
@@ -181,4 +187,28 @@ class FirebaseHelper {
       print(AppStrings.notAcceptedPermission);
     }
   }
+
+  Future<void> getToken() async {
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    print(fcmToken);
+  }
+
+  Future<void> setupInteractedMessage() async {
+  RemoteMessage? initialMessage =
+      await FirebaseMessaging.instance.getInitialMessage();
+  if (initialMessage != null) {
+    print(initialMessage);
+  }
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    print(message);
+  });
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage message) {
+      print(message.data);
+      if (message.notification != null) {
+        print(message.notification);
+      }
+    },
+  );
+}
 }

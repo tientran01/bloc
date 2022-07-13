@@ -43,7 +43,7 @@ dependencies:
   get: ^4.6.5
   get_it: ^7.2.0
   firebase_auth: ^3.3.5
-  firebase_core: ^1.11.0
+  firebase_core: ^1.19.1
   pinput: ^2.2.11
   google_fonts: ^3.0.1
   google_sign_in: ^5.3.3
@@ -59,7 +59,10 @@ dependencies:
 
   flutter_local_notifications: ^9.7.0
   timezone: ^0.8.0
-  firebase_messaging: ^11.2.5
+  firebase_messaging: 11.4.4
+  firebase_analytics: ^9.1.12
+  cloud_firestore: ^3.2.1
+  firebase_crashlytics: 2.8.4
 
 dev_dependencies:
   flutter_test:
