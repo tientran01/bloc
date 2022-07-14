@@ -43,11 +43,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       if (user != null) {
         Loading.dismiss();
-        NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.main,
-          arguments: user,
-        );
-        SharedPreferencesHelper.shared.login(user.uid);
+        SharedPreferencesHelper.shared.saveUid(user.uid);
+        if (SharedPreferencesHelper.shared.getUid() != null) {
+          NavigationService.navigatorKey.currentState?.pushNamed(
+            AppRouteName.main,
+            arguments: user,
+          );
+        }
         return Future.value(user);
       }
       return Future.error(Error.loginWithFirebaseError);

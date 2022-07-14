@@ -1,3 +1,4 @@
+import 'package:bloc_demo/bloc/notification/bloc/notification_bloc.dart';
 import 'package:bloc_demo/main.dart';
 import '../bloc/foget_password/bloc/forget_password_bloc.dart';
 import '../bloc/home/bloc/home_bloc.dart';
@@ -19,5 +20,6 @@ class BlocModule {
     getIt.registerLazySingleton<VerifyOtpBloc>(() => VerifyOtpBloc());
     getIt.registerLazySingleton<ForgetPasswordBloc>(() => ForgetPasswordBloc());
     getIt.registerLazySingleton<HomeBloc>(() => HomeBloc());
+    getIt.registerLazySingleton<NotificationBloc>(() => NotificationBloc());
   }
 }

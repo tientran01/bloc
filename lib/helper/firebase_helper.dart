@@ -1,11 +1,15 @@
 // ignore_for_file: avoid_print
+import 'package:bloc_demo/bloc/notification/bloc/notification_bloc.dart';
+import 'package:bloc_demo/bloc/notification/bloc/notification_event.dart';
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
 import 'package:bloc_demo/helper/shared_preferences_helper.dart';
+import 'package:bloc_demo/main.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../resource/app_strings.dart';
@@ -20,6 +24,8 @@ class FirebaseHelper {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  int number = 0;
+  int? notificationTotal;
 
   Future<User?> loginWithEmailAndPassword({
     String? email,
@@ -127,7 +133,7 @@ class FirebaseHelper {
           AppRouteName.showUser,
           arguments: user,
         );
-        SharedPreferencesHelper.shared.login(user?.uid ?? "");
+        SharedPreferencesHelper.shared.saveUid(user?.uid ?? "");
       } on FirebaseException catch (e) {
         Loading.showError(AppStrings.error);
         if (e.code == Error.accountExist) {
@@ -158,7 +164,7 @@ class FirebaseHelper {
           AppRouteName.showUser,
           arguments: user,
         );
-        SharedPreferencesHelper.shared.login(user.uid);
+        SharedPreferencesHelper.shared.saveUid(user.uid);
       } else {
         print(AppStrings.error);
       }
@@ -174,7 +180,7 @@ class FirebaseHelper {
     );
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
-      alert: true, 
+      alert: true,
       badge: true,
       sound: true,
     );
@@ -194,21 +200,41 @@ class FirebaseHelper {
   }
 
   Future<void> setupInteractedMessage() async {
-  RemoteMessage? initialMessage =
-      await FirebaseMessaging.instance.getInitialMessage();
-  if (initialMessage != null) {
-    print(initialMessage);
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      print(initialMessage);
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) {
+        NavigationService.navigatorKey.currentState?.pushNamed(
+          AppRouteName.notificationDetail,
+          arguments: message,
+        );
+      },
+    );
+
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
+        if (message.notification != null) {
+          print(message.notification?.title);
+        }
+        number++;
+        notificationTotal = number;
+        addBadge(number);
+      },
+    );
   }
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    print(message);
-  });
-  FirebaseMessaging.onMessage.listen(
-    (RemoteMessage message) {
-      print(message.data);
-      if (message.notification != null) {
-        print(message.notification);
-      }
-    },
-  );
-}
+
+  void addBadge(int count) {
+    FlutterAppBadger.updateBadgeCount(count);
+    getIt.get<NotificationBloc>().add(UpdateNotificationEvent(count: count));
+    totalNotification();
+  }
+
+  int totalNotification() {
+    print("Total: $notificationTotal");
+    return notificationTotal ?? 0;
+  }
 }

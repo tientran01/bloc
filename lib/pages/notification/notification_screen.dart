@@ -21,17 +21,6 @@ class NotificationScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomButton(
-              text: AppStrings.showLocalNotification,
-              onTap: () {
-                NotificationService.shared.showNotification(
-                  id: 0,
-                  title: AppStrings.localNotificationTitle,
-                  body: AppStrings.localNotificationBody,
-                );
-              },
-            ),
-            SizedBox(height: Constants.size20),
-            CustomButton(
               text: AppStrings.showScheduledNotification,
               onTap: () {
                 NotificationService.shared.showScheduledNotification(

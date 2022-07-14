@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors, depend_on_referenced_packages
 
 import 'dart:io';
-
-import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -19,14 +17,17 @@ class NotificationService {
     tz.initializeTimeZones();
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');
+
     final IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings();
+
     final InitializationSettings initializationSettings =
         InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
       macOS: null,
     );
+
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onSelectNotification: onSelectNotification,
@@ -52,20 +53,6 @@ class NotificationService {
           NotificationDetails(android: androidNotificationDetails);
     }
     return notificationDetails;
-  }
-
-  Future<void> showNotification({
-    required int id,
-    required String title,
-    required String body,
-  }) async {
-    final detail = await notificationDetails();
-    await flutterLocalNotificationsPlugin.show(
-      id,
-      title,
-      body,
-      detail,
-    );
   }
 
   Future<void> showScheduledNotification({
@@ -115,7 +102,7 @@ class NotificationService {
 
   void onSelectNotification(String? payload) {
     NavigationService.navigatorKey.currentState
-        ?.pushNamed(payload ?? AppRouteName.chat);
+        ?.pushNamed(payload ?? "");
   }
 
   int getHour(int hour) {

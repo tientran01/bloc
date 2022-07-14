@@ -75,4 +75,7 @@ class AppStrings {
       "User granted provisional permission";
   static const String notAcceptedPermission =
       "User declined or has not accepted permission";
+  static const String supported = "Supported";
+  static const String notSupported = "Not supported";
+  static const String failedSupport = "Failed to get badge support.";
 }
