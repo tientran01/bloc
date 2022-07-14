@@ -12,5 +12,3 @@ class UpdateNotificationEvent extends NotificationEvent {
   @override
   List<Object?> get props => [count];
 }
-
-class GetTotalNotificationEvent extends NotificationEvent {}

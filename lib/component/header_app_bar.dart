@@ -43,30 +43,40 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         InkWell(
           onTap: onTap,
-          child: Container(
-            padding: EdgeInsets.all(Constants.size15),
-            child: Badge(
-              position: BadgePosition.topEnd(),
-              badgeContent: notificationCount == null
-                  ? const Text(
-                      "0",
-                      style: TextStyle(
-                        color: AppColor.hFFFFFF,
-                      ),
-                    )
-                  : Text(
-                      "$notificationCount",
-                      style: const TextStyle(
-                        color: AppColor.hFFFFFF,
-                      ),
-                    ),
-              animationType: BadgeAnimationType.fade,
-              badgeColor: AppColor.h413F42,
-              child: Image.asset(
-                AppResource.notification,
-                width: Constants.size30,
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.all(Constants.size10),
+                child: Image.asset(
+                  AppResource.notification,
+                  width: Constants.size30,
+                ),
               ),
-            ),
+              Positioned(
+                top: 0,
+                right: 1,
+                child: Container(
+                  padding: EdgeInsets.all(Constants.size10),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.h413F42,
+                  ),
+                  child: notificationCount == null
+                      ? const Text(
+                          "0",
+                          style: TextStyle(
+                            color: AppColor.hFFFFFF,
+                          ),
+                        )
+                      : Text(
+                          "$notificationCount",
+                          style: const TextStyle(
+                            color: AppColor.hFFFFFF,
+                          ),
+                        ),
+                ),
+              )
+            ],
           ),
         ),
       ],
@@ -76,3 +86,26 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(Constants.heightAppBar);
 }
+
+// Badge(
+//               position: BadgePosition.topEnd(),
+//               badgeContent: notificationCount == null
+//                   ? const Text(
+//                       "0",
+//                       style: TextStyle(
+//                         color: AppColor.hFFFFFF,
+//                       ),
+//                     )
+//                   : Text(
+//                       "$notificationCount",
+//                       style: const TextStyle(
+//                         color: AppColor.hFFFFFF,
+//                       ),
+//                     ),
+//               animationType: BadgeAnimationType.fade,
+//               badgeColor: AppColor.h413F42,
+//               child: Image.asset(
+//                 AppResource.notification,
+//                 width: Constants.size30,
+//               ),
+//             ),

@@ -1,6 +1,7 @@
 import 'package:bloc_demo/bloc/home/bloc/home_event.dart';
 import 'package:bloc_demo/bloc/home/bloc/home_state.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,6 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 ?.pushNamed(AppRouteName.login),
           );
       SharedPreferencesHelper.shared.logout();
+      print(SharedPreferencesHelper.shared.getString(AppKeyName.uid));
     } on FirebaseAuthException catch (e) {
       Text(e.toString());
     }

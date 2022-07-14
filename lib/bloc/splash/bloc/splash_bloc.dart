@@ -8,11 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(const SplashState.initstate()) {
-    on<LoginEvent>(_onLogin);
+    on<CheckLoginEvent>(_onCheckLogin);
   }
 
-  Future<void> _onLogin(LoginEvent event, Emitter<void> emitter) async {
-    if (SharedPreferencesHelper.shared.getUid() != null) {
+  Future<void> _onCheckLogin(
+      CheckLoginEvent event, Emitter<void> emitter) async {
+    if (SharedPreferencesHelper.shared.getUid(uid: state.uid) != null) {
       Future.delayed(const Duration(seconds: 2)).then(
         (value) => NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.main),

@@ -14,6 +14,18 @@ class SharedPreferencesHelper {
     return await prefs?.setString(AppKeyName.uid, uid);
   }
 
+  getUid({String? uid}) async{
+    uid = prefs?.getString(AppKeyName.uid);
+  }
+
+  logout() async {
+    return prefs?.remove(AppKeyName.uid);
+  }
+
+  getString(String key) {
+    return prefs?.getString(key);
+  }
+
   setString(String key, String data) {
     return prefs?.setString(key, data);
   }
@@ -24,13 +36,5 @@ class SharedPreferencesHelper {
 
   setInt(String key, int data) {
     return prefs?.setInt(key, data);
-  }
-
-  getUid() {
-    return prefs?.getString(AppKeyName.uid);
-  }
-
-  logout() {
-    return prefs?.remove(AppKeyName.uid);
   }
 }

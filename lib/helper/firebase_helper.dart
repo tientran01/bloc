@@ -5,6 +5,7 @@ import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
 import 'package:bloc_demo/helper/shared_preferences_helper.dart';
 import 'package:bloc_demo/main.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,7 +26,6 @@ class FirebaseHelper {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   int number = 0;
-  int? notificationTotal;
 
   Future<User?> loginWithEmailAndPassword({
     String? email,
@@ -217,11 +217,8 @@ class FirebaseHelper {
 
     FirebaseMessaging.onMessage.listen(
       (RemoteMessage message) {
-        if (message.notification != null) {
-          print(message.notification?.title);
-        }
         number++;
-        notificationTotal = number;
+        print(number);
         addBadge(number);
       },
     );
@@ -229,12 +226,7 @@ class FirebaseHelper {
 
   void addBadge(int count) {
     FlutterAppBadger.updateBadgeCount(count);
+    SharedPreferencesHelper.shared.setInt(AppKeyName.count, count);
     getIt.get<NotificationBloc>().add(UpdateNotificationEvent(count: count));
-    totalNotification();
-  }
-
-  int totalNotification() {
-    print("Total: $notificationTotal");
-    return notificationTotal ?? 0;
   }
 }
