@@ -35,10 +35,10 @@ Future<void> main() async {
   );
   NotificationService.shared.init();
   BlocModule.provider();
-  SharedPreferencesHelper.shared.setUpSharedPreferences();
+  await SharedPreferencesHelper.shared.setUpSharedPreferences();
   FirebaseHelper.shared.registerNotification();
   FirebaseHelper.shared.getToken();
-  FirebaseHelper.shared.setupInteractedMessage();
+   FirebaseHelper.shared.setupInteractedMessage();
   runApp(
     MultiBlocProvider(
       providers: [

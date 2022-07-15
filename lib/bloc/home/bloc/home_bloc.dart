@@ -31,12 +31,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<void> emitter,
   ) async {
     try {
-      FirebaseHelper.shared.signOut().then(
-            (value) => NavigationService.navigatorKey.currentState
-                ?.pushNamed(AppRouteName.login),
-          );
+      FirebaseHelper.shared.signOut();
       SharedPreferencesHelper.shared.logout();
-      print(SharedPreferencesHelper.shared.getString(AppKeyName.uid));
+      NavigationService.navigatorKey.currentState
+          ?.pushNamed(AppRouteName.login);
     } on FirebaseAuthException catch (e) {
       Text(e.toString());
     }

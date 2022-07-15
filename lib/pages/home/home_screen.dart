@@ -42,19 +42,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 displayName: user?.displayName,
                 email:
                     SharedPreferencesHelper.shared.getString(AppKeyName.email),
-                notificationCount: SharedPreferencesHelper.shared.getInt(AppKeyName.badgeCount),
-                onTap: () => NavigationService.navigatorKey.currentState
-                    ?.pushNamed(AppRouteName.notification),
+                notificationCount: SharedPreferencesHelper.shared
+                    .getInt(AppKeyName.badgeCount),
+                // onTap: () => NavigationService.navigatorKey.currentState
+                //     ?.pushNamed(AppRouteName.notification),
+                onTap: () {
+                  print(SharedPreferencesHelper.shared.prefs?.getString(AppKeyName.uid));
+                },
               ),
               body: LayoutBuilder(
                 builder: (context, constraint) {
                   return SingleChildScrollView(
                     child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraint.maxHeight),
+                      constraints: BoxConstraints(
+                        minHeight: constraint.maxHeight,
+                      ),
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Constants.size15),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Constants.size15,
+                        ),
                         child: Column(
                           children: [
                             const CustomSlider(),

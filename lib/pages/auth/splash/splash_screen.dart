@@ -22,6 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     splashBloc = SplashBloc.of(context);
     super.initState();
+    print(
+        "========${SharedPreferencesHelper.shared.prefs?.getString(AppKeyName.uid)}");
     splashBloc.add(const CheckLoginEvent());
   }
 
