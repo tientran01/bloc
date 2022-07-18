@@ -28,6 +28,7 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     SendOtpToPhoneAuthEvent event,
     Emitter<PhoneAuthState> emitter,
   ) async {
+    print(state.phoneNumber);
     FirebaseHelper.shared.verifyPhoneNumber(
       phoneNumber: state.phoneNumber ?? "",
       onVerificationCompleted: (AuthCredential authCredential) async {},

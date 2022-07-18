@@ -4,7 +4,6 @@ import 'package:bloc_demo/pages/shopping/shopping_screen.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:flutter/material.dart';
-
 import '../resource/constants.dart';
 
 class MainScreen extends StatefulWidget {

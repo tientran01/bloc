@@ -63,8 +63,7 @@ dependencies:
   flutter_app_badger: ^1.4.0
   firebase_analytics: ^9.1.12
   cloud_firestore: ^3.2.1
-  firebase_crashlytics: 2.8.4
-  badges: ^2.0.3
+  firebase_crashlytics: ^2.8.5
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
-import 'package:bloc_demo/bloc/notification/bloc/notification_bloc.dart';
-import 'package:bloc_demo/bloc/notification/bloc/notification_event.dart';
+import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
+import 'package:bloc_demo/bloc/home/bloc/home_event.dart';
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
 import 'package:bloc_demo/helper/shared_preferences_helper.dart';
@@ -152,6 +152,7 @@ class FirebaseHelper {
     OAuthCredential facebookAuthCredential;
     final LoginResult loginResult = await FacebookAuth.instance.login();
     if (loginResult.status == LoginStatus.success) {
+      Loading.showSuccess(AppStrings.success);
       facebookAuthCredential = FacebookAuthProvider.credential(
         loginResult.accessToken?.token ?? "",
       );
@@ -159,12 +160,14 @@ class FirebaseHelper {
           .signInWithCredential(facebookAuthCredential);
       User? user = userCredential.user;
       if (user != null) {
-        print(user);
+        Loading.dismiss();
         NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.showUser,
+          AppRouteName.main,
           arguments: user,
         );
         SharedPreferencesHelper.shared.saveUid(user.uid);
+        SharedPreferencesHelper.shared
+            .setString(AppKeyName.displayName, user.displayName ?? "");
       } else {
         print(AppStrings.error);
       }
@@ -220,13 +223,17 @@ class FirebaseHelper {
         number++;
         print(number);
         addBadge(number);
+        getIt.get<HomeBloc>().add(UpdateBadgeEvent(badgeCount: number));
       },
     );
   }
 
-  void addBadge(int count) {
+  void addBadge(int count) async {
     FlutterAppBadger.updateBadgeCount(count);
-    SharedPreferencesHelper.shared.setInt(AppKeyName.count, count);
-    getIt.get<NotificationBloc>().add(UpdateNotificationEvent(count: count));
+  }
+
+  void removeBadge() {
+    FlutterAppBadger.removeBadge();
+    SharedPreferencesHelper.shared.prefs?.remove(AppKeyName.badgeCount);
   }
 }

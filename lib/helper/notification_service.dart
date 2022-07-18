@@ -13,7 +13,7 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   var dateTime = DateTime.now();
-  Future<void> init() async {
+  Future<void> setup() async {
     tz.initializeTimeZones();
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');

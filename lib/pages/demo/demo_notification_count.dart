@@ -72,7 +72,7 @@ class _DemoNotificationCountState extends State<DemoNotificationCount> {
   }
 
   void _addBadge(int number) {
-    FlutterAppBadger.updateBadgeCount(number);
+    // FlutterAppBadger.updateBadgeCount(number);
   }
 
   void _removeBadge() {

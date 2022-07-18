@@ -1,11 +1,9 @@
 import 'package:bloc_demo/bloc/splash/bloc/splash_bloc.dart';
 import 'package:bloc_demo/bloc/splash/bloc/splash_event.dart';
 import 'package:bloc_demo/resource/app_color.dart';
-import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
-import '../../../helper/shared_preferences_helper.dart';
 import '../../../resource/app_strings.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,8 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     splashBloc = SplashBloc.of(context);
     super.initState();
-    print(
-        "========${SharedPreferencesHelper.shared.prefs?.getString(AppKeyName.uid)}");
     splashBloc.add(const CheckLoginEvent());
   }
 

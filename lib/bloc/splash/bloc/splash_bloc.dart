@@ -14,7 +14,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onCheckLogin(
       CheckLoginEvent event, Emitter<void> emitter) async {
-    if (SharedPreferencesHelper.shared.prefs!.getString(AppKeyName.uid) != null) {
+    if (SharedPreferencesHelper.shared.prefs!.getString(AppKeyName.uid) !=
+        null) {
       Future.delayed(const Duration(seconds: 2)).then(
         (value) => NavigationService.navigatorKey.currentState
             ?.pushNamed(AppRouteName.main),

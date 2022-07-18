@@ -7,13 +7,25 @@ import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../helper/shared_preferences_helper.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState.initState()) {
     on<ShowProfileEvent>(_onShowProfile);
     on<SignOutEvent>(_onSignOut);
+    on<UpdateBadgeEvent>(_onUpdateBadge);
+  }
+
+  Future<void> _onUpdateBadge(
+    UpdateBadgeEvent event,
+    Emitter<void> emitter,
+  ) async {
+    int? badgeCount = ((event.badgeCount ?? state.badge) ?? 0);
+    emitter(state.copyWith(badge: badgeCount));
+    await SharedPreferencesHelper.shared.setInt(
+      AppKeyName.badgeCount,
+      badgeCount,
+    );
   }
 
   Future<void> _onShowProfile(
@@ -35,6 +47,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       SharedPreferencesHelper.shared.logout();
       NavigationService.navigatorKey.currentState
           ?.pushNamed(AppRouteName.login);
+      FirebaseHelper.shared.removeBadge();
+      SharedPreferencesHelper.shared.prefs?.remove(AppKeyName.email);
     } on FirebaseAuthException catch (e) {
       Text(e.toString());
     }

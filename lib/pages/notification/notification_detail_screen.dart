@@ -1,5 +1,7 @@
 import 'package:bloc_demo/component/custom_app_bar.dart';
+import 'package:bloc_demo/helper/shared_preferences_helper.dart';
 import 'package:bloc_demo/resource/app_color.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:bloc_demo/resource/constants.dart';
@@ -13,11 +15,18 @@ class NotificationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     RemoteMessage? message =
         ModalRoute.of(context)?.settings.arguments as RemoteMessage;
+    int countNotification =
+        SharedPreferencesHelper.shared.getInt(AppKeyName.badgeCount);
     return Scaffold(
       appBar: const CustomAppBar(
         title: AppStrings.notification,
       ),
-      body: buildNotificationItem(message),
+      body: ListView.builder(
+        itemCount: countNotification,
+        itemBuilder: (context, index) {
+          return buildNotificationItem(message);
+        },
+      ),
     );
   }
 

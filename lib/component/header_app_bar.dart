@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_style.dart';
@@ -29,7 +28,7 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            displayName ?? "Hello",
+            "Hello $displayName",
             style: AppStyle.title,
           ),
           Text(
@@ -61,19 +60,12 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
                     shape: BoxShape.circle,
                     color: AppColor.h413F42,
                   ),
-                  child: notificationCount == null
-                      ? const Text(
-                          "0",
-                          style: TextStyle(
-                            color: AppColor.hFFFFFF,
-                          ),
-                        )
-                      : Text(
-                          "$notificationCount",
-                          style: const TextStyle(
-                            color: AppColor.hFFFFFF,
-                          ),
-                        ),
+                  child: Text(
+                    notificationCount.toString(),
+                    style: const TextStyle(
+                      color: AppColor.hFFFFFF,
+                    ),
+                  ),
                 ),
               )
             ],
@@ -86,26 +78,3 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(Constants.heightAppBar);
 }
-
-// Badge(
-//               position: BadgePosition.topEnd(),
-//               badgeContent: notificationCount == null
-//                   ? const Text(
-//                       "0",
-//                       style: TextStyle(
-//                         color: AppColor.hFFFFFF,
-//                       ),
-//                     )
-//                   : Text(
-//                       "$notificationCount",
-//                       style: const TextStyle(
-//                         color: AppColor.hFFFFFF,
-//                       ),
-//                     ),
-//               animationType: BadgeAnimationType.fade,
-//               badgeColor: AppColor.h413F42,
-//               child: Image.asset(
-//                 AppResource.notification,
-//                 width: Constants.size30,
-//               ),
-//             ),

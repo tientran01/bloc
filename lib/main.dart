@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_demo/bloc/demo/bloc/demo_bloc.dart';
 import 'package:bloc_demo/bloc/foget_password/bloc/forget_password_bloc.dart';
 import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
@@ -33,12 +35,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  NotificationService.shared.init();
+  NotificationService.shared.setup();
   BlocModule.provider();
   await SharedPreferencesHelper.shared.setUpSharedPreferences();
   FirebaseHelper.shared.registerNotification();
   FirebaseHelper.shared.getToken();
-   FirebaseHelper.shared.setupInteractedMessage();
+  FirebaseHelper.shared.setupInteractedMessage();
+  FlutterAppBadger.removeBadge(); 
   runApp(
     MultiBlocProvider(
       providers: [
@@ -86,10 +89,6 @@ class _MyAppState extends State<MyApp> {
       appBadgeSupported = AppStrings.failedSupport;
     }
     if (!mounted) return;
-
-    setState(() {
-      appBadgeSupported;
-    });
   }
 
   @override
