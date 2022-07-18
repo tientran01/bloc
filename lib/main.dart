@@ -29,7 +29,6 @@ import 'bloc/login/bloc/login_bloc.dart';
 import 'helper/notification_service.dart';
 
 final GetIt getIt = GetIt.instance;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
