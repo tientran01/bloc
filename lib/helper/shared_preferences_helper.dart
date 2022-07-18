@@ -1,42 +1,40 @@
-import 'package:bloc_demo/resource/app_route_name.dart';
-import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../resource/app_key_name.dart';
 
 class SharedPreferencesHelper {
   static SharedPreferencesHelper shared = SharedPreferencesHelper._internal();
   SharedPreferencesHelper._internal();
-  final Future<SharedPreferences> sharedPreferences =
-      SharedPreferences.getInstance();
+  SharedPreferences? prefs;
 
-  login(String uid) async {
-    var prefs = await sharedPreferences;
-    prefs.setString(AppKeyName.uid, uid);
+  Future<void> setUpSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
-  autoLogin() async {
-    var prefs = await sharedPreferences;
-    prefs.getString(AppKeyName.uid);
-  }
-
-  checkLogin({String? uid}) async {
-    var prefs = await sharedPreferences;
-    uid = prefs.getString(AppKeyName.uid);
-    if (uid != null) {
-      Future.delayed(const Duration(seconds: 2)).then(
-        (value) => NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.main),
-      );
-    } else {
-      Future.delayed(const Duration(seconds: 2)).then(
-        (value) => NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.login),
-      );
-    }
+  saveUid(String uid) async {
+    return await prefs!.setString(AppKeyName.uid, uid);
   }
 
   logout() async {
-    var prefs = await sharedPreferences;
-    prefs.remove(AppKeyName.uid);
+    return prefs!.remove(AppKeyName.uid);
+  }
+
+  remove(String key) {
+    return prefs!.remove(key);
+  }
+
+  getString(String key) {
+    return prefs!.getString(key);
+  }
+
+  setString(String key, String data) {
+    return prefs!.setString(key, data);
+  }
+
+  getInt(String key) {
+    return prefs!.getInt(key);
+  }
+
+  setInt(String key, int data) {
+    return prefs!.setInt(key, data);
   }
 }

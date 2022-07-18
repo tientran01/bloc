@@ -1,13 +1,18 @@
 // ignore_for_file: avoid_print
+import 'package:bloc_demo/bloc/home/bloc/home_bloc.dart';
+import 'package:bloc_demo/bloc/home/bloc/home_event.dart';
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/loading.dart';
 import 'package:bloc_demo/helper/shared_preferences_helper.dart';
+import 'package:bloc_demo/main.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../resource/app_strings.dart';
 
 class FirebaseHelper {
@@ -18,11 +23,14 @@ class FirebaseHelper {
   late PhoneAuthCredential phoneAuthCredential;
   late AuthCredential authCredential;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  int number = 0;
 
-  Future<User?> loginWithEmailAndPassword(
-      {String? email, String? password}) async {
+  Future<User?> loginWithEmailAndPassword({
+    String? email,
+    String? password,
+  }) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -33,8 +41,10 @@ class FirebaseHelper {
     return user;
   }
 
-  Future<User?> signUpWithEmailAndPassword(
-      {String? email, String? password}) async {
+  Future<User?> signUpWithEmailAndPassword({
+    String? email,
+    String? password,
+  }) async {
     User? user;
     UserCredential userCredential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -123,7 +133,7 @@ class FirebaseHelper {
           AppRouteName.showUser,
           arguments: user,
         );
-        SharedPreferencesHelper.shared.login(user?.uid ?? "");
+        SharedPreferencesHelper.shared.saveUid(user?.uid ?? "");
       } on FirebaseException catch (e) {
         Loading.showError(AppStrings.error);
         if (e.code == Error.accountExist) {
@@ -142,6 +152,7 @@ class FirebaseHelper {
     OAuthCredential facebookAuthCredential;
     final LoginResult loginResult = await FacebookAuth.instance.login();
     if (loginResult.status == LoginStatus.success) {
+      Loading.showSuccess(AppStrings.success);
       facebookAuthCredential = FacebookAuthProvider.credential(
         loginResult.accessToken?.token ?? "",
       );
@@ -149,15 +160,80 @@ class FirebaseHelper {
           .signInWithCredential(facebookAuthCredential);
       User? user = userCredential.user;
       if (user != null) {
-        print(user);
+        Loading.dismiss();
         NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.showUser,
+          AppRouteName.main,
           arguments: user,
         );
-        SharedPreferencesHelper.shared.login(user.uid);
+        SharedPreferencesHelper.shared.saveUid(user.uid);
+        SharedPreferencesHelper.shared
+            .setString(AppKeyName.displayName, user.displayName ?? "");
       } else {
         print(AppStrings.error);
       }
     }
+  }
+
+  Future<void> registerNotification() async {
+    NotificationSettings settings = await firebaseMessaging.requestPermission(
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print(AppStrings.grantedPermission);
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print(AppStrings.grantedProvisionalPermission);
+    } else {
+      print(AppStrings.notAcceptedPermission);
+    }
+  }
+
+  Future<void> getToken() async {
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    print(fcmToken);
+  }
+
+  Future<void> setupInteractedMessage() async {
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      print(initialMessage);
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) {
+        NavigationService.navigatorKey.currentState?.pushNamed(
+          AppRouteName.notificationDetail,
+          arguments: message,
+        );
+      },
+    );
+
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
+        number++;
+        print(number);
+        addBadge(number);
+        getIt.get<HomeBloc>().add(UpdateBadgeEvent(badgeCount: number));
+      },
+    );
+  }
+
+  void addBadge(int count) async {
+    FlutterAppBadger.updateBadgeCount(count);
+  }
+
+  void removeBadge() {
+    FlutterAppBadger.removeBadge();
+    SharedPreferencesHelper.shared.prefs?.remove(AppKeyName.badgeCount);
   }
 }

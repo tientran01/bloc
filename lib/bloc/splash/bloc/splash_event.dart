@@ -6,9 +6,9 @@ abstract class SplashEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoginEvent extends SplashEvent {
+class CheckLoginEvent extends SplashEvent {
   final String? uid;
-  const LoginEvent({this.uid});
+  const CheckLoginEvent({this.uid});
   @override
   List<Object?> get props => [uid];
 }

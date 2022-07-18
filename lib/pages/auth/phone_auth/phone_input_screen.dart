@@ -43,11 +43,12 @@ class PhoneInputScreen extends StatelessWidget {
                                 phoneNumber: phoneNumber),
                           ),
                   suffixIcon: InkWell(
-                    onTap: () => getIt.get<PhoneAuthBloc>().add(
-                          SendOtpToPhoneAuthEvent(
-                            phoneNumber: state.phoneNumber,
-                          ),
-                        ),
+                    onTap: () {
+                      getIt.get<PhoneAuthBloc>().add(
+                            const SendOtpToPhoneAuthEvent()
+                          );
+                      print("Screen : ${state.phoneNumber}");
+                    },
                     customBorder: const CircleBorder(),
                     splashColor: AppColor.h413F42,
                     child: Image.asset(

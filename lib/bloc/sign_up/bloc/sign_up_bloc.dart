@@ -1,7 +1,10 @@
 import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_event.dart';
 import 'package:bloc_demo/bloc/sign_up/bloc/sign_up_state.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
+import 'package:bloc_demo/helper/shared_preferences_helper.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
+import 'package:bloc_demo/resource/app_strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,10 +38,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       );
       if (user != null) {
         NavigationService.navigatorKey.currentState
-            ?.pushNamed(AppRouteName.showInformation);
+            ?.pushNamed(AppRouteName.main);
+        SharedPreferencesHelper.shared.prefs
+            ?.setString(AppKeyName.email, user.email ?? "");
         return Future.value(user);
       }
-      return Future.error("User is null after creating an account");
+      return Future.error(AppStrings.error);
     } on FirebaseAuthException catch (e) {
       return Future.error(e.message!);
     }

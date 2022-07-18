@@ -59,4 +59,23 @@ class AppStrings {
   static const String shopping = "Shopping";
   static const String category = "Category";
   static const String detailProduct = "Detail product";
+  static const String notification = "Notification";
+  static const String channelDescription = "Channel Description";
+  static const String channelId = "Channel Id";
+  static const String channelName = "Channel Name";
+  static const String showLocalNotification = "Show Local Notification";
+  static const String showScheduledNotification = "Show Scheduled Notification";
+  static const String showNotificationWithPayload =
+      "Show Notification With Payload";
+  static const String showPushNotification = "Show Push Notification";
+  static const String localNotificationTitle = "Bloc Demo";
+  static const String localNotificationBody = "Local Notification Body";
+  static const String grantedPermission = "User granted permission";
+  static const String grantedProvisionalPermission =
+      "User granted provisional permission";
+  static const String notAcceptedPermission =
+      "User declined or has not accepted permission";
+  static const String supported = "Supported";
+  static const String notSupported = "Not supported";
+  static const String failedSupport = "Failed to get badge support.";
 }

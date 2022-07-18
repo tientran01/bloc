@@ -10,11 +10,14 @@ import 'package:bloc_demo/pages/auth/show_information_screen.dart';
 import 'package:bloc_demo/pages/auth/login_screen.dart';
 import 'package:bloc_demo/pages/demo/demo_cubit_screen.dart';
 import 'package:bloc_demo/pages/demo/demo_getx_screen.dart';
+import 'package:bloc_demo/pages/demo/demo_notification_count.dart';
 import 'package:bloc_demo/pages/home/home_screen.dart';
 import 'package:bloc_demo/pages/home/show_user_screen.dart';
 import 'package:bloc_demo/pages/auth/profile_screen.dart';
 import 'package:bloc_demo/pages/auth/splash/splash_screen.dart';
 import 'package:bloc_demo/pages/main_screen.dart';
+import 'package:bloc_demo/pages/notification/notification_detail_screen.dart';
+import 'package:bloc_demo/pages/notification/notification_screen.dart';
 import 'package:bloc_demo/pages/product/detail_product_screen.dart';
 import 'package:bloc_demo/pages/shopping/shopping_screen.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
@@ -41,6 +44,9 @@ class RouteName {
     AppRouteName.showUser: (BuildContext context) => const ShowUserScreen(),
     AppRouteName.chat: (BuildContext context) => const ChatScreen(),
     AppRouteName.shopping: (BuildContext context) => const ShoppingScreen(),
-    AppRouteName.detaiProduct: (BuildContext context) => const DetailProductScreen()
+    AppRouteName.detaiProduct: (BuildContext context) => const DetailProductScreen(),
+    AppRouteName.notification: (BuildContext context) => const NotificationScreen(),
+    AppRouteName.demoNotificationCount: (BuildContext context) => const DemoNotificationCount(),
+    AppRouteName.notificationDetail: (BuildContext context) => const NotificationDetailScreen(),
   };
 }

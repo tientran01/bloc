@@ -1,20 +1,20 @@
+import 'package:bloc_demo/resource/app_color.dart';
+import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:bloc_demo/resource/app_style.dart';
 import 'package:bloc_demo/resource/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../resource/app_color.dart';
-
 class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? displayName;
   final String? email;
-  final String? photoURL;
   final VoidCallback? onTap;
+  final int? notificationCount;
   const HeaderAppBar({
     Key? key,
     this.displayName,
     this.email,
-    this.photoURL,
     this.onTap,
+    this.notificationCount,
   }) : super(key: key);
 
   @override
@@ -28,11 +28,11 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            displayName ?? "Hello",
+            "Hello $displayName",
             style: AppStyle.title,
           ),
           Text(
-            email ?? "anhtien@gmail.com",
+            email ?? "",
             style: AppStyle.lightTitle.copyWith(
               fontSize: 14,
             ),
@@ -40,37 +40,37 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        photoURL != null
-            ? GestureDetector(
-                onTap: onTap,
+        InkWell(
+          onTap: onTap,
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.all(Constants.size10),
+                child: Image.asset(
+                  AppResource.notification,
+                  width: Constants.size30,
+                ),
+              ),
+              Positioned(
+                top: 0,
+                right: 1,
                 child: Container(
+                  padding: EdgeInsets.all(Constants.size10),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColor.hDDDDDD,
+                    color: AppColor.h413F42,
                   ),
-                  padding: EdgeInsets.all(Constants.size10),
-                  margin: EdgeInsets.only(right: Constants.size10),
-                  child: Image.network(
-                    "$photoURL",
-                    fit: BoxFit.fitHeight,
+                  child: Text(
+                    notificationCount.toString(),
+                    style: const TextStyle(
+                      color: AppColor.hFFFFFF,
+                    ),
                   ),
                 ),
               )
-            : GestureDetector(
-                onTap: onTap,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColor.hDDDDDD,
-                  ),
-                  padding: EdgeInsets.all(Constants.size10),
-                  margin: EdgeInsets.only(right: Constants.size10),
-                  child: const Icon(
-                    Icons.person,
-                    color: AppColor.h413F42,
-                  ),
-                ),
-              ),
+            ],
+          ),
+        ),
       ],
     );
   }

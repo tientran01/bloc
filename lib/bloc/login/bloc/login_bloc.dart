@@ -3,6 +3,7 @@ import 'package:bloc_demo/bloc/login/bloc/login_state.dart';
 import 'package:bloc_demo/helper/error.dart';
 import 'package:bloc_demo/helper/firebase_helper.dart';
 import 'package:bloc_demo/helper/shared_preferences_helper.dart';
+import 'package:bloc_demo/resource/app_key_name.dart';
 import 'package:bloc_demo/resource/app_route_name.dart';
 import 'package:bloc_demo/router/navigation_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,11 +44,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       if (user != null) {
         Loading.dismiss();
+        SharedPreferencesHelper.shared.saveUid(user.uid);
+        SharedPreferencesHelper.shared
+            .setString(AppKeyName.email, user.email ?? "");
         NavigationService.navigatorKey.currentState?.pushNamed(
-          AppRouteName.home,
+          AppRouteName.main,
           arguments: user,
         );
-        SharedPreferencesHelper.shared.login(user.uid);
         return Future.value(user);
       }
       return Future.error(Error.loginWithFirebaseError);
@@ -79,10 +82,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _onSignOut(SignOutEvent event, Emitter<void> emitter) async {
     try {
-      FirebaseHelper.shared.signOut().then(
-            (value) => NavigationService.navigatorKey.currentState
-                ?.pushNamed(AppRouteName.login),
-          );
+      FirebaseHelper.shared.signOut();
+      SharedPreferencesHelper.shared.logout();
+      NavigationService.navigatorKey.currentState
+          ?.pushNamed(AppRouteName.login);
     } catch (e) {
       print(e);
     }

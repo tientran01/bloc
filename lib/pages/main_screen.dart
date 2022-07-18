@@ -1,11 +1,9 @@
-import 'package:bloc_demo/pages/auth/sign_up_screen.dart';
 import 'package:bloc_demo/pages/chat/chat_screen.dart';
 import 'package:bloc_demo/pages/home/home_screen.dart';
 import 'package:bloc_demo/pages/shopping/shopping_screen.dart';
 import 'package:bloc_demo/resource/app_color.dart';
 import 'package:bloc_demo/resource/app_resource.dart';
 import 'package:flutter/material.dart';
-
 import '../resource/constants.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const ChatScreen(),
     const ShoppingScreen(),
-    SignUpScreen()
+    const HomeScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -69,8 +67,10 @@ class _MainScreenState extends State<MainScreen> {
       );
 
   void _onTapItem(int index) {
-    setState(() {
-      selectIndex = index;
-    });
+    setState(
+      () {
+        selectIndex = index;
+      },
+    );
   }
 }
